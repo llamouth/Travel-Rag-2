@@ -1,22 +1,28 @@
 // routes/userPreferencesRoutes.js
 const express = require('express');
-const userPreferencesController = require('../controllers/usersPreferencesController');
+const {
+    allUserPreferences,
+    userPreferencesById,
+    newUserPreferences,
+    updatedUserPreferences,
+    deletedUserPreferences,
+} = require('../controllers/usersPreferencesController');
 
 const router = express.Router();
 
 // Get all user preferences
-router.get('/', userPreferencesController.getAllUserPreferences);
+router.get('/', allUserPreferences);
 
 // Get user preferences by ID
-router.get('/:id', userPreferencesController.getUserPreferencesById);
+router.get('/:id', userPreferencesById);
 
 // Create user preferences
-router.post('/', userPreferencesController.createUserPreferences);
+router.post('/', newUserPreferences);
 
 // Update user preferences
-router.put('/:id', userPreferencesController.updateUserPreferences);
+router.put('/:id', updatedUserPreferences);
 
 // Delete user preferences
-router.delete('/:id', userPreferencesController.deleteUserPreferences);
+router.delete('/:id', deletedUserPreferences);
 
 module.exports = router;

@@ -1,10 +1,10 @@
 // controllers/userPreferencesController.js
-const userPreferencesQueries = require('../queries/usersPreferencesQueries');
+const {getAllUserPreferences, createUserPreferences, updateUserPreferences, deleteUserPreferences, getUserPreferencesById} = require('../queries/usersPreferencesQueries');
 
 // Get all user preferences
-const getAllUserPreferences = async (req, res) => {
+const allUserPreferences = async (req, res) => {
     try {
-        const userPreferences = await userPreferencesQueries.getAllUserPreferences();
+        const userPreferences = await getAllUserPreferences();
         res.status(200).json(userPreferences);
     } catch (error) {
         console.error('Error getting all user preferences:', error);
@@ -13,10 +13,10 @@ const getAllUserPreferences = async (req, res) => {
 };
 
 // Get user preferences by ID
-const getUserPreferencesById = async (req, res) => {
+const userPreferencesById = async (req, res) => {
     try {
         const { id } = req.params;
-        const userPreferences = await userPreferencesQueries.getUserPreferencesById(id);
+        const userPreferences = await getUserPreferencesById(id);
         if (userPreferences) {
             res.status(200).json(userPreferences);
         } else {
@@ -29,10 +29,10 @@ const getUserPreferencesById = async (req, res) => {
 };
 
 // Create user preferences
-const createUserPreferences = async (req, res) => {
+const newUserPreferences = async (req, res) => {
     try {
         const { user_id, preferences } = req.body;
-        const newUserPreferences = await userPreferencesQueries.createUserPreferences(user_id, preferences);
+        const newUserPreferences = await createUserPreferences(user_id, preferences);
         res.status(201).json({ message: 'User preferences created successfully', userPreferences: newUserPreferences });
     } catch (error) {
         console.error('Error creating user preferences:', error);
@@ -41,13 +41,13 @@ const createUserPreferences = async (req, res) => {
 };
 
 // Update user preferences
-const updateUserPreferences = async (req, res) => {
+const updatedUserPreferences = async (req, res) => {
     try {
         const { id } = req.params;
         const { user_id, preferences } = req.body;
-        const updatedUserPreferences = await userPreferencesQueries.updateUserPreferences(id, user_id, preferences);
-        if (updatedUserPreferences) {
-            res.status(200).json({ message: 'User preferences updated successfully', userPreferences: updatedUserPreferences });
+        const newUserPreferences = await updateUserPreferences(id, user_id, preferences);
+        if (newUserPreferences) {
+            res.status(200).json({ message: 'User preferences updated successfully', userPreferences: newUserPreferences });
         } else {
             res.status(404).json({ error: 'User preferences not found' });
         }
@@ -58,11 +58,11 @@ const updateUserPreferences = async (req, res) => {
 };
 
 // Delete user preferences
-const deleteUserPreferences = async (req, res) => {
+const deletedUserPreferences = async (req, res) => {
     try {
         const { id } = req.params;
-        const deletedUserPreferences = await userPreferencesQueries.deleteUserPreferences(id);
-        if (deletedUserPreferences) {
+        const removedUserPreferences = await deleteUserPreferences(id);
+        if (removedUserPreferences) {
             res.status(200).json({ message: 'User preferences deleted successfully' });
         } else {
             res.status(404).json({ error: 'User preferences not found' });
@@ -74,9 +74,9 @@ const deleteUserPreferences = async (req, res) => {
 };
 
 module.exports = {
-    getAllUserPreferences,
-    getUserPreferencesById,
-    createUserPreferences,
-    updateUserPreferences,
-    deleteUserPreferences,
+    allUserPreferences,
+    userPreferencesById,
+    newUserPreferences,
+    updatedUserPreferences,
+    deletedUserPreferences,
 };
