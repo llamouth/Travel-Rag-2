@@ -1,0 +1,200 @@
+Age,Gender,Income,Education_Level,Travel_Frequency,Preferred_Activities,Vacation_Budget,Location,Proximity_to_Mountains,Proximity_to_Beaches,Favorite_Season,Pets,Environmental_Concerns,Preference
+56,male,71477,bachelor,9,skiing,2477,urban,175,267,summer,0,1,1
+69,male,88740,master,1,swimming,4777,suburban,228,190,fall,0,1,0
+46,female,46562,master,0,skiing,1469,urban,71,280,winter,0,0,1
+32,non-binary,99044,high school,6,hiking,1482,rural,31,255,summer,1,0,1
+60,female,106583,high school,5,sunbathing,516,suburban,23,151,winter,1,1,0
+25,male,110588,doctorate,3,sunbathing,2895,urban,6,47,fall,0,1,0
+38,male,22245,bachelor,1,swimming,4994,rural,157,225,fall,0,1,0
+56,non-binary,109411,bachelor,8,sunbathing,3656,urban,210,166,winter,1,0,0
+36,male,22531,master,6,swimming,2408,suburban,218,263,summer,1,1,0
+40,non-binary,90840,high school,1,swimming,4044,rural,271,15,summer,1,1,0
+28,female,42036,master,4,skiing,3495,suburban,159,51,spring,0,1,0
+28,non-binary,97902,high school,3,skiing,1747,urban,33,21,winter,1,0,0
+41,female,52794,bachelor,7,hiking,1591,suburban,130,254,summer,1,1,1
+53,female,93042,bachelor,9,sunbathing,2221,rural,211,148,fall,0,1,0
+57,male,65802,high school,3,hiking,2607,suburban,36,258,fall,0,0,1
+41,female,99810,master,2,skiing,2830,urban,77,209,fall,1,1,1
+20,male,112635,bachelor,7,sunbathing,675,rural,280,211,winter,0,0,0
+39,non-binary,52469,doctorate,4,hiking,4979,rural,253,50,summer,0,1,0
+19,non-binary,69522,bachelor,5,sunbathing,4028,rural,162,293,fall,0,0,0
+41,female,46992,doctorate,1,hiking,803,urban,207,162,summer,0,0,0
+61,non-binary,107749,high school,5,hiking,4140,urban,296,169,fall,0,1,0
+47,female,97814,master,7,skiing,3818,suburban,298,41,spring,1,1,0
+55,non-binary,52222,high school,1,skiing,635,suburban,263,241,fall,1,1,0
+19,female,82148,bachelor,1,swimming,862,rural,164,1,winter,0,1,0
+38,female,112172,master,4,skiing,3424,urban,234,54,spring,1,0,0
+50,non-binary,43152,master,3,skiing,3923,urban,243,161,summer,1,1,0
+29,non-binary,98433,high school,3,sunbathing,1823,rural,48,185,spring,1,0,0
+39,non-binary,46417,high school,4,skiing,2850,suburban,220,230,summer,0,1,1
+61,non-binary,29865,bachelor,6,swimming,3940,rural,256,291,summer,0,1,0
+42,female,83719,doctorate,1,swimming,948,rural,201,24,spring,1,0,0
+66,female,46795,high school,2,hiking,4703,suburban,165,294,spring,1,0,1
+44,non-binary,92148,master,3,sunbathing,2510,suburban,30,125,fall,1,0,0
+59,non-binary,34116,doctorate,5,hiking,1714,rural,209,90,summer,1,0,0
+45,male,58179,high school,3,skiing,4382,suburban,46,124,spring,0,0,1
+33,female,73175,high school,9,skiing,2385,rural,118,296,spring,1,0,1
+32,female,21627,high school,4,sunbathing,3849,urban,107,91,fall,1,0,0
+64,non-binary,97004,doctorate,7,swimming,2581,rural,288,27,summer,0,1,0
+68,male,65603,high school,0,hiking,3216,rural,51,149,winter,0,1,1
+61,non-binary,93856,bachelor,2,skiing,2754,suburban,93,105,fall,1,1,1
+69,female,109258,high school,7,swimming,3623,suburban,260,181,summer,0,0,0
+20,female,31144,master,4,swimming,3453,suburban,212,15,winter,0,0,0
+54,male,114704,high school,8,swimming,2611,suburban,246,221,spring,1,1,0
+68,non-binary,32243,master,6,hiking,2713,suburban,274,134,summer,1,0,0
+24,male,30602,doctorate,8,swimming,1998,suburban,207,168,spring,0,1,0
+38,non-binary,43401,high school,9,skiing,3701,suburban,77,8,summer,0,0,0
+26,male,68080,high school,0,swimming,4571,urban,250,173,spring,1,1,0
+56,non-binary,97682,doctorate,6,swimming,553,rural,231,250,winter,1,1,0
+35,non-binary,98367,bachelor,7,hiking,1641,suburban,123,184,winter,0,1,1
+21,non-binary,98203,doctorate,0,hiking,3244,urban,49,167,summer,0,1,1
+42,female,119298,doctorate,0,swimming,3895,suburban,266,270,summer,0,0,0
+31,non-binary,21605,master,9,sunbathing,2564,urban,164,133,winter,0,0,0
+67,female,37721,high school,7,sunbathing,558,suburban,160,263,spring,1,1,0
+26,male,41939,high school,5,sunbathing,4235,suburban,84,17,summer,1,1,0
+43,non-binary,28389,master,6,hiking,2718,urban,25,18,spring,0,0,0
+19,female,86904,master,3,sunbathing,1670,rural,197,248,fall,1,1,0
+37,male,87867,high school,9,skiing,2921,urban,241,47,fall,0,1,0
+45,non-binary,48902,bachelor,4,sunbathing,2556,rural,264,138,spring,1,1,0
+64,male,99552,bachelor,4,swimming,3229,rural,243,227,summer,0,0,0
+24,female,63471,master,8,swimming,3540,suburban,13,177,spring,0,1,0
+61,female,111027,high school,2,skiing,3359,suburban,31,285,fall,0,1,1
+25,non-binary,83063,bachelor,0,hiking,2382,suburban,51,24,summer,0,0,0
+64,female,27118,bachelor,1,hiking,3319,suburban,64,202,fall,1,1,1
+52,female,108178,high school,9,hiking,2349,suburban,166,121,winter,1,0,0
+31,male,23721,doctorate,1,hiking,3276,suburban,93,292,winter,0,1,1
+34,non-binary,87005,doctorate,9,sunbathing,4675,suburban,261,262,summer,0,1,0
+53,non-binary,26436,bachelor,5,swimming,1065,urban,13,221,winter,1,1,0
+67,non-binary,118018,doctorate,7,swimming,4280,rural,250,170,winter,1,1,0
+57,male,30043,doctorate,9,swimming,1209,suburban,279,73,spring,0,1,0
+21,female,33914,bachelor,6,swimming,4581,urban,278,219,fall,1,1,0
+19,non-binary,95101,high school,0,swimming,1672,rural,98,167,summer,1,0,0
+23,non-binary,53090,high school,7,hiking,1963,rural,20,105,winter,0,0,1
+59,male,105171,bachelor,6,skiing,1737,rural,105,164,spring,1,0,1
+21,male,73615,bachelor,1,swimming,2766,urban,195,171,summer,1,1,0
+46,non-binary,46301,master,9,hiking,2288,suburban,277,207,spring,1,1,0
+35,non-binary,116651,doctorate,5,skiing,826,urban,26,66,fall,0,0,1
+43,male,45329,bachelor,6,skiing,3518,urban,258,76,summer,1,1,0
+61,male,110652,doctorate,5,hiking,2480,suburban,79,180,winter,1,1,1
+51,male,26429,bachelor,0,hiking,2704,rural,283,216,fall,1,0,0
+27,male,107701,doctorate,8,skiing,1759,suburban,38,132,summer,0,0,1
+53,female,50032,high school,2,hiking,1939,suburban,77,69,spring,1,1,0
+31,female,73556,high school,4,skiing,3985,suburban,242,90,spring,0,0,0
+48,non-binary,46842,bachelor,7,sunbathing,3205,rural,117,105,spring,0,1,0
+65,female,22837,doctorate,1,swimming,4769,urban,136,99,winter,0,1,0
+32,male,106832,bachelor,3,swimming,2362,urban,298,258,fall,0,0,0
+25,non-binary,27088,doctorate,4,hiking,1396,urban,192,151,summer,1,0,0
+31,male,28582,bachelor,8,skiing,4858,rural,106,70,fall,1,0,0
+40,female,71245,bachelor,1,skiing,4552,urban,261,205,spring,1,0,0
+57,male,75306,master,5,hiking,1813,rural,109,210,spring,1,1,1
+38,non-binary,22063,master,6,swimming,3175,urban,215,182,winter,1,0,0
+33,female,27349,master,9,swimming,3477,rural,68,96,summer,0,0,0
+62,non-binary,111832,master,1,sunbathing,2519,urban,54,115,fall,1,0,0
+35,female,110659,master,9,swimming,780,urban,61,194,winter,0,0,0
+64,male,53842,master,9,sunbathing,3358,urban,240,251,summer,0,1,0
+41,non-binary,89781,doctorate,3,sunbathing,634,rural,20,162,summer,1,1,0
+43,female,119815,master,3,hiking,2646,suburban,244,235,fall,1,0,0
+42,female,98244,high school,5,swimming,3467,rural,254,96,summer,1,0,0
+62,female,62242,bachelor,1,hiking,2180,urban,7,114,winter,0,0,1
+58,female,60226,high school,8,hiking,1539,rural,284,201,spring,0,0,0
+46,male,86160,master,4,hiking,1046,urban,232,281,summer,0,0,1
+32,male,42309,doctorate,4,skiing,3959,rural,290,179,summer,0,1,0
+62,female,43913,bachelor,6,sunbathing,2341,rural,185,102,fall,0,1,0
+18,male,68694,master,5,skiing,2193,rural,171,4,summer,0,0,0
+42,male,26568,bachelor,9,hiking,2748,rural,91,59,winter,0,1,0
+24,female,40183,bachelor,3,swimming,1695,urban,283,187,spring,1,0,0
+26,male,33173,high school,5,sunbathing,3653,suburban,190,48,summer,0,0,0
+41,non-binary,110273,doctorate,1,sunbathing,3502,rural,271,284,spring,1,0,0
+18,non-binary,101890,bachelor,8,swimming,3135,rural,123,254,spring,1,0,0
+61,male,36906,doctorate,3,sunbathing,4740,urban,173,21,spring,0,0,0
+25,female,45806,high school,6,sunbathing,4595,suburban,129,171,fall,0,1,0
+41,non-binary,30509,master,8,swimming,1584,rural,33,157,winter,1,1,0
+28,male,23052,high school,6,hiking,1975,urban,1,232,fall,0,1,1
+68,male,60468,doctorate,2,skiing,3775,rural,167,130,summer,1,1,0
+34,female,62395,master,1,skiing,4945,suburban,17,69,spring,0,0,1
+25,female,60554,doctorate,5,sunbathing,610,suburban,56,52,fall,1,1,0
+52,male,88709,bachelor,2,skiing,1547,urban,133,270,spring,1,1,1
+52,female,52597,bachelor,5,sunbathing,892,urban,45,274,fall,1,1,0
+50,non-binary,23068,doctorate,6,swimming,1458,urban,80,57,fall,0,1,0
+22,non-binary,63579,bachelor,3,hiking,4052,rural,150,84,summer,0,0,0
+59,male,20545,high school,4,sunbathing,4831,urban,19,198,fall,1,0,0
+56,male,109152,doctorate,0,hiking,2217,suburban,170,17,spring,1,0,0
+58,female,31478,master,0,sunbathing,1554,suburban,240,90,fall,0,0,0
+45,non-binary,89599,doctorate,7,swimming,3119,suburban,286,200,winter,0,0,0
+24,female,77091,master,5,hiking,1804,urban,68,79,winter,0,1,1
+26,male,42888,doctorate,0,skiing,4518,suburban,156,249,winter,1,1,1
+25,male,71946,doctorate,4,hiking,2511,suburban,76,25,fall,1,0,0
+29,male,60005,doctorate,4,sunbathing,1015,rural,164,147,winter,1,0,0
+51,male,116079,bachelor,7,sunbathing,3363,rural,69,57,summer,0,0,0
+50,male,61993,doctorate,0,swimming,4317,urban,250,50,fall,1,0,0
+65,male,85314,master,0,swimming,1186,urban,213,108,spring,0,0,0
+40,female,24311,doctorate,0,swimming,1898,urban,1,151,fall,0,0,0
+41,female,100062,bachelor,6,sunbathing,1096,rural,249,124,spring,0,0,0
+54,female,109696,high school,3,skiing,1633,rural,222,280,fall,0,0,1
+52,non-binary,67322,bachelor,6,hiking,3563,suburban,212,73,fall,1,1,0
+61,female,119736,bachelor,9,swimming,3525,rural,259,198,winter,0,1,0
+57,male,33692,master,4,hiking,523,urban,151,78,summer,1,1,0
+39,female,54008,doctorate,6,sunbathing,2204,rural,52,231,summer,0,1,0
+44,female,54591,high school,4,hiking,690,suburban,15,27,fall,1,0,1
+52,non-binary,97929,high school,3,skiing,4067,urban,159,72,summer,0,1,0
+18,male,72377,high school,6,swimming,3443,rural,20,60,summer,1,1,0
+52,non-binary,96867,bachelor,5,hiking,2133,urban,223,47,winter,0,1,0
+54,non-binary,39912,master,3,swimming,2779,urban,289,223,summer,0,0,0
+64,non-binary,77242,high school,0,hiking,2005,suburban,263,220,winter,0,1,0
+31,female,109800,bachelor,6,sunbathing,2341,rural,8,216,fall,0,1,0
+20,male,111627,bachelor,7,hiking,1137,rural,43,239,spring,1,1,1
+18,male,82041,master,4,sunbathing,3688,suburban,161,265,winter,0,0,0
+22,non-binary,78378,bachelor,9,skiing,2993,urban,270,215,fall,0,0,0
+43,male,79828,doctorate,8,hiking,1767,suburban,158,109,spring,1,0,0
+31,male,46213,bachelor,7,skiing,4271,rural,74,237,winter,0,0,1
+56,non-binary,80191,master,1,skiing,3153,rural,251,68,winter,1,1,0
+44,female,59610,bachelor,6,skiing,3862,rural,287,197,summer,0,1,0
+26,non-binary,98054,bachelor,7,hiking,1925,urban,248,201,winter,1,0,0
+32,non-binary,67240,bachelor,3,skiing,3909,suburban,266,104,summer,0,0,0
+32,female,74794,high school,0,sunbathing,1415,urban,26,1,summer,0,0,0
+43,female,71600,doctorate,0,skiing,1120,urban,52,297,fall,1,0,1
+59,female,114047,high school,4,skiing,1141,suburban,260,143,summer,0,0,0
+30,female,55594,bachelor,7,hiking,1825,rural,191,203,summer,1,1,1
+68,non-binary,90200,bachelor,3,skiing,1358,suburban,264,226,fall,0,1,0
+49,female,37365,bachelor,0,skiing,3324,urban,5,230,spring,1,1,1
+56,male,104017,master,2,hiking,1055,suburban,35,55,winter,0,1,1
+66,non-binary,44569,doctorate,2,sunbathing,4418,urban,133,7,winter,1,0,0
+69,non-binary,88432,high school,8,sunbathing,4305,rural,266,10,summer,1,1,0
+49,female,55892,doctorate,3,hiking,771,suburban,95,265,winter,1,0,1
+21,female,73848,bachelor,3,skiing,951,rural,210,76,spring,0,0,0
+47,male,111899,master,3,hiking,2126,suburban,55,258,winter,1,0,1
+54,female,110319,doctorate,4,hiking,858,urban,113,58,spring,0,1,0
+40,non-binary,39168,master,6,swimming,2240,rural,10,237,fall,0,1,0
+56,female,41953,doctorate,3,skiing,1267,suburban,45,184,spring,0,0,1
+62,male,57034,bachelor,6,sunbathing,3044,suburban,25,276,fall,0,1,0
+32,non-binary,35142,high school,4,skiing,2776,rural,275,285,summer,0,1,1
+60,non-binary,74313,master,3,hiking,4741,urban,266,247,summer,0,0,0
+46,female,61675,doctorate,7,swimming,757,rural,81,296,winter,1,1,0
+53,male,72202,bachelor,7,sunbathing,4948,rural,52,180,spring,0,1,0
+30,male,98753,bachelor,8,hiking,2550,urban,43,144,summer,1,0,1
+49,female,102509,high school,3,hiking,1830,urban,85,111,summer,1,1,1
+24,non-binary,55720,doctorate,3,swimming,2883,rural,260,53,fall,0,0,0
+68,non-binary,45978,high school,6,hiking,3432,rural,234,62,fall,0,1,0
+39,non-binary,79101,doctorate,5,swimming,4475,urban,165,190,summer,0,1,0
+45,female,44060,bachelor,3,skiing,2747,rural,215,236,summer,1,1,1
+19,non-binary,109995,master,1,skiing,3426,urban,143,100,spring,0,0,0
+59,non-binary,22825,doctorate,1,skiing,1668,rural,235,92,summer,1,0,0
+62,female,20215,high school,3,hiking,3828,suburban,153,253,summer,1,0,1
+23,non-binary,31937,bachelor,5,skiing,1739,suburban,36,56,winter,0,0,1
+45,female,20587,high school,5,hiking,3687,suburban,194,201,winter,1,0,1
+45,male,22585,master,9,sunbathing,3295,rural,285,141,winter,1,1,0
+61,male,87551,high school,5,sunbathing,3538,suburban,201,237,winter,0,1,0
+61,female,82162,master,9,swimming,1726,urban,155,189,winter,0,0,0
+37,female,118231,master,0,skiing,2863,suburban,49,285,fall,0,1,1
+47,female,93527,bachelor,4,hiking,1730,rural,84,274,summer,0,1,1
+28,non-binary,39413,bachelor,4,skiing,2091,urban,159,12,winter,1,1,0
+45,non-binary,90703,master,9,hiking,4073,suburban,23,56,winter,0,0,1
+42,female,22112,bachelor,6,skiing,2131,urban,87,242,summer,1,0,1
+56,female,83980,master,7,sunbathing,964,rural,44,66,spring,1,0,0
+50,non-binary,47366,bachelor,7,swimming,2881,rural,295,58,summer,0,1,0
+18,non-binary,64532,master,8,swimming,1742,rural,6,168,winter,0,0,0
+44,female,109460,master,6,swimming,3363,suburban,196,244,fall,1,0,0
+69,non-binary,56587,bachelor,7,sunbathing,2178,urban,193,110,winter,1,1,0
+30,non-binary,109854,doctorate,7,hiking,3066,rural,108,196,spring,0,0,1
+58,male,95401,bachelor,3,swimming,4482,rural,295,158,spring,0,1,0
+20,female,105122,bachelor,3,hiking,3667,suburban,161,278,winter,0,0,1
