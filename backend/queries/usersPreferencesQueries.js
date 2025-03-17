@@ -52,10 +52,24 @@ const deleteUserPreferences = async (id) => {
     }
 };
 
+const searchUserPreferences = async (queryEmbedding) => {
+    try {
+        return await db.any(`
+            SELECT * , (embedding <-> $1::vector) AS distance
+            FROM user_preferences
+            ORDER BY distance ASC
+            LIMIT 10;
+        `, [queryEmbedding]);
+    } catch (error) {
+        throw error;
+    }
+};
+
 module.exports = {
     getAllUserPreferences,
     getUserPreferencesById,
     createUserPreferences,
     updateUserPreferences,
     deleteUserPreferences,
+    searchUserPreferences
 };

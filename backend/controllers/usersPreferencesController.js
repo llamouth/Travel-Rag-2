@@ -1,5 +1,5 @@
-// controllers/userPreferencesController.js
-const {getAllUserPreferences, createUserPreferences, updateUserPreferences, deleteUserPreferences, getUserPreferencesById} = require('../queries/usersPreferencesQueries');
+const { getAllUserPreferences, createUserPreferences, updateUserPreferences, deleteUserPreferences, getUserPreferencesById, searchUserPreferences: searchUserPreferencesQuery } = require('../queries/usersPreferencesQueries');
+const generateEmbedding  = require('../utils/generateEmbedding');
 
 // Get all user preferences
 const allUserPreferences = async (req, res) => {
@@ -73,10 +73,23 @@ const deletedUserPreferences = async (req, res) => {
     }
 };
 
+const searchUserPreferences = async (req, res) => {
+    try {
+        const { query } = req.body;
+        const queryEmbedding = await generateEmbedding(query);
+        const results = await searchUserPreferencesQuery(queryEmbedding);
+        res.status(200).json(results);
+    } catch (error) {
+        console.error('Error searching user preferences')
+    }
+}
+
+
 module.exports = {
     allUserPreferences,
     userPreferencesById,
     newUserPreferences,
     updatedUserPreferences,
     deletedUserPreferences,
+    searchUserPreferences
 };
