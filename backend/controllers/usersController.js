@@ -1,12 +1,14 @@
 // controllers/userController.js
-const userQueries = require('../queries/userQueries');
-const bcrypt = require('bcrypt');
+const { getAllUsers, getUserById, updateUser, deleteUser, createUser, loginUser } = require('../queries/userQueries');
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const SECRET = process.env.JWT_SECRET;
+
 
 // Get all users
-const getAllUsers = async (req, res) => {
+const allUsers = async (req, res) => {
     try {
-        const users = await userQueries.getAllUsers();
+        const users = await getAllUsers();
         res.status(200).json(users);
     } catch (error) {
         console.error('Error getting all users:', error);
@@ -15,10 +17,10 @@ const getAllUsers = async (req, res) => {
 };
 
 // Get user by ID
-const getUserById = async (req, res) => {
+const userById = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await userQueries.getUserById(id);
+        const user = await getUserById(id);
         if (user) {
             res.status(200).json(user);
         } else {
@@ -31,13 +33,12 @@ const getUserById = async (req, res) => {
 };
 
 // Update user
-const updateUser = async (req, res) => {
+const updatedUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { username, email, first_name, last_name, profile_picture, bio } = req.body;
-        const updatedUser = await userQueries.updateUser(id, username, email, first_name, last_name, profile_picture, bio);
-        if (updatedUser) {
-            res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+        const userUpdated = await updateUser({id, ...req.body});
+        if (userUpdated) {
+            res.status(200).json({ user: userUpdated });
         } else {
             res.status(404).json({ error: 'User not found' });
         }
@@ -48,11 +49,11 @@ const updateUser = async (req, res) => {
 };
 
 // Delete user
-const deleteUser = async (req, res) => {
+const deletedUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const deletedUser = await userQueries.deleteUser(id);
-        if (deletedUser) {
+        const userDeleted = await deleteUser(id);
+        if (userDeleted) {
             res.status(200).json({ message: 'User deleted successfully' });
         } else {
             res.status(404).json({ error: 'User not found' });
@@ -66,10 +67,14 @@ const deleteUser = async (req, res) => {
 // User registration (as before)
 const registerUser = async (req, res) => {
     try {
-        const { username, email, password, first_name, last_name } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await userQueries.createUser(username, email, hashedPassword, first_name, last_name);
-        res.status(201).json({ message: 'User registered successfully', user: newUser });
+        const newUser = await createUser(req.body);
+
+        if (newUser.error) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        const token = jwt.sign({ userId: newUser.id }, SECRET, { expiresIn: '1h' });
+        res.status(201).json({ user: newUser, token });
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).json({ error: 'Internal server error' });
@@ -77,15 +82,16 @@ const registerUser = async (req, res) => {
 };
 
 // User login (as before)
-const loginUser = async (req, res) => {
+const userLogIn = async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const user = await userQueries.getUserByEmail(email);
-        if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+        const userLoggedIn = await loginUser(req.body)
+
+        if (userLoggedIn?.error || !userLoggedIn) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
-        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ message: 'Login successful', token });
+
+        const token = jwt.sign({ userId: userLoggedIn.id }, SECRET, { expiresIn: '1h' });
+        res.status(200).json({ user: userLoggedIn, token });
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).json({ error: 'Internal server error' });
@@ -93,10 +99,10 @@ const loginUser = async (req, res) => {
 };
 
 module.exports = {
-    getAllUsers,
-    getUserById,
-    updateUser,
-    deleteUser,
+    allUsers,
+    userById,
+    updatedUser,
+    deletedUser,
     registerUser,
-    loginUser,
+    userLogIn,
 };

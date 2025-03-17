@@ -1,4 +1,5 @@
 const db = require('../db/dbConfig');
+const bcrypt = require('bcrypt');
 
 // Get all users
 const getAllUsers = async () => {
@@ -18,30 +19,46 @@ const getUserById = async (id) => {
     }
 };
 
-// Create a new user (as before)
-const createUser = async (username, email, password_hash, first_name, last_name) => {
+// Create new user
+const createUser = async (user) => {
     try {
-        return await db.one(
-            'INSERT INTO users (username, email, password_hash, first_name, last_name) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [username, email, password_hash, first_name, last_name]
+        const { username, email, password, profile_picture, bio, first_name, last_name } = user; 
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds); // Hash the plain password
+
+        const newUser = await db.one(
+            "INSERT INTO users (email, username, password_hash, profile_picture, bio, first_name, last_name) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            [email, username, hashedPassword, profile_picture, bio, first_name, last_name]
         );
-    } catch (error) {
-        throw error;
+        return newUser;
+    } catch (err) {
+        return {error: err};
     }
 };
 
-// Get user by email (as before)
-const getUserByEmail = async (email) => {
+// Log user in 
+const loginUser = async (user) => {
     try {
-        return await db.oneOrNone('SELECT * FROM users WHERE email = $1', email);
-    } catch (error) {
-        throw error;
+        const loggedInUser = await db.oneOrNone("SELECT * FROM users WHERE username=$1", user.username);
+        if (!loggedInUser) {
+            return false;
+        }
+
+        const passwordMatch = await bcrypt.compare(user.password, loggedInUser.password_hash); 
+        if (!passwordMatch) {
+            return false;
+        }
+        return loggedInUser;
+    } catch (err) {
+        return { error: err };
     }
 };
 
 // Update user
-const updateUser = async (id, username, email, first_name, last_name, profile_picture, bio) => {
+const updateUser = async (user) => {
     try {
+        const { id, username, email, first_name, last_name, profile_picture, bio } = user
         return await db.oneOrNone(
             'UPDATE users SET username = $2, email = $3, first_name = $4, last_name = $5, profile_picture = $6, bio = $7 WHERE id = $1 RETURNING *',
             [id, username, email, first_name, last_name, profile_picture, bio]
@@ -64,7 +81,7 @@ module.exports = {
     getAllUsers,
     getUserById,
     createUser,
-    getUserByEmail,
+    loginUser,
     updateUser,
     deleteUser,
 };
