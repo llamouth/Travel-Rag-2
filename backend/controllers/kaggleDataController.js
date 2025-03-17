@@ -1,11 +1,12 @@
-// controllers/kaggleDataController.js
 const {
     getAllKaggleData: getAllKaggleDataQuery,
     getKaggleDataById: getKaggleDataByIdQuery,
     createKaggleData: createKaggleDataQuery,
     updateKaggleData: updateKaggleDataQuery,
     deleteKaggleData: deleteKaggleDataQuery,
-  } = require('../queries/kaggleDataQueries');
+    searchKaggleData: searchKaggleDataQuery,
+} = require('../queries/kaggleDataQueries');
+const generateEmbedding  = require('../utils/generateEmbedding');
   
   // Get all kaggle data
   const getAllKaggleData = async (req, res) => {
@@ -76,6 +77,18 @@ const {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+
+  const searchKaggleData = async (req, res) => {
+    try {
+      const { query } = req.body;
+      const queryEmbedding = await generateEmbedding(query);
+      const results = await searchKaggleDataQuery(queryEmbedding);
+      res.status(200).json(results);
+    } catch (error) {
+      console.error('Error searching kaggle data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
   
   module.exports = {
     getAllKaggleData,
@@ -83,4 +96,5 @@ const {
     createKaggleData,
     updateKaggleData,
     deleteKaggleData,
+    searchKaggleData
   };

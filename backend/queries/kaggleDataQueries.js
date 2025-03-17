@@ -123,10 +123,24 @@ const deleteKaggleData = async (id) => {
   }
 };
 
+const searchKaggleData = async (queryEmbedding) => {
+  try {
+      return await db.any(`
+          SELECT * , (embedding <-> $1::vector) AS distance
+          FROM kaggle_data
+          ORDER BY distance ASC
+          LIMIT 10;
+      `, [queryEmbedding]);
+  } catch (error) {
+      throw error;
+  }
+};
+
 module.exports = {
   getAllKaggleData,
   getKaggleDataById,
   createKaggleData,
   updateKaggleData,
   deleteKaggleData,
+  searchKaggleData
 };

@@ -1,22 +1,33 @@
 // routes/destinationRoutes.js
 const express = require('express');
-const destinationController = require('../controllers/destinationsController');
+const {
+    getAllDestinations,
+    getDestinationById,
+    createDestination,
+    updateDestination,
+    deleteDestination,
+    searchDestinations,
+} = require('../controllers/destinationsController');
 
 const router = express.Router();
 
 // Get all destinations
-router.get('/', destinationController.getAllDestinations);
+router.get('/', getAllDestinations);
 
 // Get destination by ID
-router.get('/:id', destinationController.getDestinationById);
+router.get('/:id', getDestinationById);
 
 // Create a new destination
-router.post('/', destinationController.createDestination);
+router.post('/', createDestination);
+
+// Search destinations
+router.post('/search', searchDestinations); 
 
 // Update destination
-router.put('/:id', destinationController.updateDestination);
+router.put('/:id', updateDestination);
 
 // Delete destination
-router.delete('/:id', destinationController.deleteDestination);
+router.delete('/:id', deleteDestination);
+
 
 module.exports = router;

@@ -52,10 +52,24 @@ const deleteDestination = async (id) => {
     }
 };
 
+const searchDestinations = async (queryEmbedding) => {
+    try {
+        return await db.any(`
+            SELECT id, name, description, (embedding <-> $1::vector) AS distance
+            FROM destinations
+            ORDER BY distance ASC
+            LIMIT 10;
+        `, [queryEmbedding]);
+    } catch (error) {
+        throw error;
+    }
+};
+
 module.exports = {
     getAllDestinations,
     getDestinationById,
     createDestination,
     updateDestination,
     deleteDestination,
+    searchDestinations
 };
