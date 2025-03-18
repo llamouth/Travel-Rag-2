@@ -31,9 +31,10 @@ const userPreferencesById = async (req, res) => {
 // Create user preferences
 const newUserPreferences = async (req, res) => {
     try {
-        const { user_id, preferences } = req.body;
+        const { user_id } = req.params
+        const { preferences } = req.body;
         const newUserPreferences = await createUserPreferences(user_id, preferences);
-        res.status(201).json({ message: 'User preferences created successfully', userPreferences: newUserPreferences });
+        res.status(201).json({ userPreferences: newUserPreferences });
     } catch (error) {
         console.error('Error creating user preferences:', error);
         res.status(500).json({ error: 'Internal server error' });

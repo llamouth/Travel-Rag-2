@@ -21,8 +21,11 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS user_preferences (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
-    preferences TEXT, -- Store user preferences as JSON or text
-    preferences_embedding vector(768) -- Embedding vector (adjust dimension as needed)
+    preferred_activities VARCHAR(255),
+    vacation_budget INTEGER,
+    location VARCHAR(255),
+    favorite_season VARCHAR(255),
+    preferences_embedding vector(768) -- Embedding vector 
 );
 
 CREATE TABLE IF NOT EXISTS destinations (
@@ -31,7 +34,7 @@ CREATE TABLE IF NOT EXISTS destinations (
     description TEXT,
     location VARCHAR(255),
     image_url VARCHAR(255),
-    embedding vector(768) -- Embedding vector for destinations
+    embedding vector(768) 
 );
 
 CREATE TABLE IF NOT EXISTS user_recommendations (

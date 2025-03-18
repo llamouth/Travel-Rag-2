@@ -67,7 +67,7 @@ const deletedUser = async (req, res) => {
 // User registration (as before)
 const registerUser = async (req, res) => {
     try {
-        const newUser = await createUser(req.body);
+        const newUser = await createUser(req.body.user);
 
         if (newUser.error) {
             return res.status(401).json({ error: 'Invalid credentials' });

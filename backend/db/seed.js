@@ -65,17 +65,41 @@ async function seedDatabase() {
 
         // Seed user_preferences with embeddings
         const userPreferences = [
-            { user_id: 1, preferences: '{"activity": "hiking", "location": "mountains"}' },
-            { user_id: 2, preferences: '{"activity": "swimming", "location": "beaches"}' }
+            {
+              user_id: 1,
+              preferred_activities: 'hiking',
+              vacation_budget: 5000,
+              location: 'mountains',
+              favorite_season: 'summer',
+            },
+            {
+              user_id: 2,
+              preferred_activities: 'swimming',
+              vacation_budget: 3000,
+              location: 'beaches',
+              favorite_season: 'summer',
+            },
         ];
-
+          
         for (const preference of userPreferences) {
-            const embedding = await generateEmbedding(preference.preferences);
+            const embedding = await generateEmbedding(
+              `${preference.preferred_activities} ${preference.vacation_budget} ${preference.location} ${preference.favorite_season}`
+            );
             if (embedding) {
-                await db.none(`
-                    INSERT INTO user_preferences (user_id, preferences, preferences_embedding)
-                    VALUES ($1, $2, $3)
-                `, [preference.user_id, preference.preferences, embedding]);
+              await db.none(
+                `
+                INSERT INTO user_preferences (user_id, preferred_activities, vacation_budget, location, favorite_season, preferences_embedding)
+                VALUES ($1, $2, $3, $4, $5, $6)
+                `,
+                [
+                  preference.user_id,
+                  preference.preferred_activities,
+                  preference.vacation_budget,
+                  preference.location,
+                  preference.favorite_season,
+                  embedding,
+                ]
+              );
             }
         }
         console.log('User preferences seeded successfully!');

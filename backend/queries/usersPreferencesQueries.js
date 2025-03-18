@@ -1,5 +1,7 @@
 // queries/userPreferencesQueries.js
 const db = require('../db/dbConfig');
+const generateEmbedding = require('../utils/generateEmbedding');
+
 
 // Get all user preferences
 const getAllUserPreferences = async () => {
@@ -22,9 +24,15 @@ const getUserPreferencesById = async (id) => {
 // Create user preferences
 const createUserPreferences = async (user_id, preferences) => {
     try {
+        const { preferred_activities, vacation_budget, location, favorite_season} = preferences;
+
+        const preferencesText = `${preferred_activities} ${vacation_budget} ${location} ${favorite_season}`;
+
+        const preferences_embedding = await generateEmbedding(preferencesText);
+
         return await db.one(
-            'INSERT INTO user_preferences (user_id, preferences) VALUES ($1, $2) RETURNING *',
-            [user_id, preferences]
+            'INSERT INTO user_preferences (user_id, preferred_activities, vacation_budget, location, favorite_season, preferences_embedding) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+            [user_id, preferred_activities, vacation_budget, location, favorite_season, preferences_embedding]
         );
     } catch (error) {
         throw error;
