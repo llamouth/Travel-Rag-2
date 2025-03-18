@@ -26,7 +26,7 @@ const geminiAi = async (userPreferences) => {
         ... (more destinations) ...
       ]
     
-      Only provide the recommendations in the specified format. Do not include any additional text or explanations.
+      Please provide actual destinaion names. E.G(New York, Ny, Atlanta, GA) Only provide the recommendations in the specified format. Do not include any additional text or explanations.
     `;
     
     const geminiResult = await geminiModel.generateContent(geminiPrompt);

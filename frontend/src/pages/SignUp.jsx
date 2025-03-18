@@ -24,7 +24,8 @@ function SignUp({setIsLoggedIn}) {
     try {
       const newUser = await createUser(user);
       setIsLoggedIn(true);
-      window.localStorage.setItem('token', newUser.token);
+      localStorage.setItem('token', newUser.token);
+      localStorage.setItem('userId', newUser.user.id);
       navigate(`/preferences/${newUser.user.id}`);
     } catch (error) {
       console.error('Signup failed:', error);

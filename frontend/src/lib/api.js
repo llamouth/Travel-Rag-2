@@ -41,7 +41,7 @@ export const updateUserPreferences = async (userId, preferences) => {
 
 export const createUser = async (user) => {
   try {
-      const response = await axios.post(`${API_BASE_URL}/users/register`, { user });
+      const response = await axios.post(`${API_BASE_URL}/users/register`,  user );
       return response.data;
   } catch (error) {
       throw error;
@@ -50,7 +50,7 @@ export const createUser = async (user) => {
 
 export const loginUser = async (credentials) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/login`, credentials);
+    const response = await axios.post(`${API_BASE_URL}/users/login`, credentials);
     return response.data;
   } catch (error) {
     throw error;

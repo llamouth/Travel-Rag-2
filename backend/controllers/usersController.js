@@ -67,12 +67,12 @@ const deletedUser = async (req, res) => {
 // User registration (as before)
 const registerUser = async (req, res) => {
     try {
-        const newUser = await createUser(req.body.user);
+        const newUser = await createUser(req.body);
 
         if (newUser.error) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
-
+        
         const token = jwt.sign({ userId: newUser.id }, SECRET, { expiresIn: '1h' });
         res.status(201).json({ user: newUser, token });
     } catch (error) {
