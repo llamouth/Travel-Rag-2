@@ -40,7 +40,6 @@ function Preferences() {
 
     const handleSavePreferences = async () => {
         try {
-            console.log(preferences)
             await createUserPreferences(id, preferences);
             navigate(`/dashboard?userId=${id}`);
         } catch (error) {

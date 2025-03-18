@@ -5,8 +5,8 @@ import DestinationCard from './DestinationCard';
 function RecommendationList({ recommendations }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {recommendations.map((recommendation) => (
-        <DestinationCard key={recommendation.name} recommendation={recommendation} />
+      {recommendations.gemini.map((recommendation, i) => (
+        <DestinationCard key={i + 1} recommendation={recommendation} />
       ))}
     </div>
   );

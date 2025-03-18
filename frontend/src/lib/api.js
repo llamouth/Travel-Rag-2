@@ -65,3 +65,12 @@ export const createUserPreferences = async (userId, preferences) => {
     throw error;
   }
 };
+
+export const createRecommendations = async (userId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/userRecommendations/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

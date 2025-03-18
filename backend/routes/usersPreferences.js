@@ -17,7 +17,7 @@ router.get('/', allUserPreferences);
 router.get('/:id', userPreferencesById);
 
 // Create user preferences
-router.post('/:user_id', newUserPreferences);
+router.post('/:id', newUserPreferences);
 
 // Update user preferences
 router.put('/:id', updatedUserPreferences);

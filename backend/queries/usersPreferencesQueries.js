@@ -15,7 +15,7 @@ const getAllUserPreferences = async () => {
 // Get user preferences by ID
 const getUserPreferencesById = async (id) => {
     try {
-        return await db.oneOrNone('SELECT * FROM user_preferences WHERE id = $1', id);
+        return await db.oneOrNone('SELECT * FROM user_preferences WHERE user_id = $1', id);
     } catch (error) {
         throw error;
     }

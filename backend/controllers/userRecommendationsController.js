@@ -34,9 +34,12 @@ const getUserRecommendationsById = async (req, res) => {
       return res.status(404).json({ error: 'User preferences not found' });
     }
     
-    const userPreferenceEmbedding = await generateEmbedding(userPreferences.preferences);
+    const preferencesText = `${userPreferences.preferred_activities} ${userPreferences.vacation_budget} ${userPreferences.location} ${userPreferences.favorite_season}`;
+
+    const userPreferenceEmbedding = await generateEmbedding(preferencesText);
+
     
-    const geminiText = await geminiAi(userPreferences.preferences)
+    const geminiText = await geminiAi(userPreferences)
 
     // Parse Gemini recommendations 
     const geminiRecommendations = parseGeminiRecommendations(geminiText); // Parse Gemini's output
@@ -45,7 +48,7 @@ const getUserRecommendationsById = async (req, res) => {
     const kaggleDataResults = (await searchKaggleData(userPreferenceEmbedding)).slice(0, 5);
 
     // 3. Combine and Rank Results
-    const combinedResults = [...geminiRecommendations, ...kaggleDataResults]
+    const combinedResults = { gemini: geminiRecommendations, kaggle: kaggleDataResults }
 
     const topRecommendations = combinedResults;
 

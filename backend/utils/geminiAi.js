@@ -4,11 +4,12 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 const geminiAi = async (userPreferences) => {
 
-    const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     const geminiPrompt = `
     Recommend travel destinations based on the following:
-      Preferences: ${userPreferences}
-      Current Location: New York, New York, United States
+      Preferences: ${userPreferences.preferred_activities},  ${userPreferences.favorite_season}
+      Budget: ${userPreferences.vaction_budget}
+      Current Location: ${userPreferences.Location}
     
       Provide the recommendations in the following format:
       [
