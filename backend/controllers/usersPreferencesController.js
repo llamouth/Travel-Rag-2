@@ -17,10 +17,11 @@ const userPreferencesById = async (req, res) => {
     try {
         const { id } = req.params;
         const userPreferences = await getUserPreferencesById(id);
+
         if (userPreferences) {
             res.status(200).json(userPreferences);
         } else {
-            res.status(404).json({ error: 'User preferences not found' });
+            res.status(200).json({ error: 'User preferences not found' });
         }
     } catch (error) {
         console.error('Error getting user preferences by ID:', error);
@@ -44,8 +45,7 @@ const newUserPreferences = async (req, res) => {
 const updatedUserPreferences = async (req, res) => {
     try {
         const { id } = req.params;
-        const { user_id, preferences } = req.body;
-        const newUserPreferences = await updateUserPreferences(id, user_id, preferences);
+        const newUserPreferences = await updateUserPreferences(id, req.body);
         if (newUserPreferences) {
             res.status(200).json({ message: 'User preferences updated successfully', userPreferences: newUserPreferences });
         } else {

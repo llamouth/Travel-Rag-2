@@ -41,13 +41,11 @@ const createUser = async (user) => {
 const loginUser = async (user) => {
     try {
         const loggedInUser = await db.oneOrNone("SELECT * FROM users WHERE username=$1", user.username);
-        console.log(user.username)
         if (!loggedInUser) {
             return false;
         }
 
         const passwordMatch = await bcrypt.compare(user.password, loggedInUser.password_hash); 
-        console.log(passwordMatch)
         if (!passwordMatch) {
             return false;
         }

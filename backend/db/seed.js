@@ -3,6 +3,7 @@ const db = require('./dbConfig');
 const generateEmbedding = require('../utils/generateEmbedding');
 const fs = require('fs').promises;
 const path = require('path');
+const csv = require('csv-parser');
 
 async function seedDatabase() {
     try {
@@ -15,23 +16,46 @@ async function seedDatabase() {
         `);
         console.log('Users seeded successfully!');
 
-        // Seed destinations with embeddings
-        const destinations = [
-            { name: 'Mountain Retreat', description: 'A peaceful mountain getaway.', location: 'Alps', image_url: 'mountain.jpg' },
-            { name: 'Beach Paradise', description: 'A sunny beach destination.', location: 'Maldives', image_url: 'beach.jpg' }
-        ];
+        // Seed destinations data
+        const destinationsData = await fs.readFile(path.join(__dirname, 'data', 'destinations.csv'), 'utf8');
+        const destinationRows = destinationsData.split('\n').slice(1);
 
-        for (const destination of destinations) {
-            const textToEmbed = `${destination.name} ${destination.description} ${destination.location}`;
-            const embedding = await generateEmbedding(textToEmbed);
-            if (embedding) {
-                await db.none(`
-                    INSERT INTO destinations (name, description, location, image_url, embedding)
-                    VALUES ($1, $2, $3, $4, $5)
-                `, [destination.name, destination.description, destination.location, destination.image_url, embedding]);
+        let destinationsCount = 0;
+        
+        for (const row of destinationRows) {
+            const values = row.split(',');
+            
+            if (values.length === 13) {
+                const [
+                    trip_id,
+                    destinations,
+                    startDate,
+                    endDate,
+                    durationDays,
+                    travelerName,
+                    travelerAge,
+                    travelerGender,
+                    travelerNationality,
+                    accommodationType,
+                    accommodationCost,
+                    transportationType,
+                    transportationCost
+                ] = values;
+
+                const description = `${destinations}, ${accommodationType}, ${transportationType}`;
+                const embedding = await generateEmbedding(description);
+
+                if (embedding) {
+                    await db.none(`
+                        INSERT INTO destinations (destination, start_date, end_date, duration_days, traveler_name, traveler_age, traveler_gender, traveler_nationality, accommodation_type, accommodation_cost, transportation_type, transportation_cost, embedding) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
+                        [destinations, startDate, endDate, durationDays, travelerName, travelerAge, travelerGender, travelerNationality, accommodationType, accommodationCost, transportationType, transportationCost, embedding]
+                    );
+                    destinationsCount++;
+                }
             }
         }
-        console.log('Destinations seeded successfully!');
+
+        console.log(`Seeded ${destinationsCount} destinations.`);  
 
         // Seed kaggle_data (as before)
         const kaggleData = await fs.readFile(path.join(__dirname, 'data', 'mountains_vs_beaches_preferences.csv'), 'utf8');
@@ -62,6 +86,8 @@ async function seedDatabase() {
         }
 
         console.log(`Kaggle data seeded successfully! ${kaggleCount} rows inserted.`);
+
+
 
         // Seed user_preferences with embeddings
         const userPreferences = [

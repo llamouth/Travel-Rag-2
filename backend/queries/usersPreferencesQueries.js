@@ -40,11 +40,13 @@ const createUserPreferences = async (user_id, preferences) => {
 };
 
 // Update user preferences
-const updateUserPreferences = async (id, user_id, preferences) => {
+const updateUserPreferences = async (id, preferences) => {
     try {
+        const { preferred_activities, vacation_budget, location, favorite_season, preferences_embedding } = preferences;
+
         return await db.oneOrNone(
-            'UPDATE user_preferences SET user_id = $2, preferences = $3 WHERE id = $1 RETURNING *',
-            [id, user_id, preferences]
+            'UPDATE user_preferences SET user_id = $1, preferred_activities = $2, vacation_budget = $3, location = $4, favorite_season = $5, preferences_embedding = $6 WHERE id = $1 RETURNING *',
+            [id, preferred_activities, vacation_budget, location, favorite_season, preferences_embedding]
         );
     } catch (error) {
         throw error;
