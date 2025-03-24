@@ -1,5 +1,6 @@
 // queries/destinationQueries.js
 const db = require('../db/dbConfig');
+const {generateEmbedding} = require('../utils/generateEmbedding')
 
 // Get all destinations
 const getAllDestinations = async () => {
@@ -20,11 +21,29 @@ const getDestinationById = async (id) => {
 };
 
 // Create a new destination
-const createDestination = async (name, description, location, image_url) => {
+const createDestination = async (trip) => {
     try {
+        const {
+            destination,
+            startDate,
+            endDate,
+            durationDays,
+            travelerName,
+            travelerAge,
+            travelerGender,
+            travelerNationality,
+            accommodationType,
+            accommodationCost,
+            transportationType,
+            transportationCost
+        } = trip;
+
+        const description = `${destination}, ${accommodationType}, ${transportationType}`;
+        const embedding = await generateEmbedding(description);
+
         return await db.one(
-            'INSERT INTO destinations (name, description, location, image_url) VALUES ($1, $2, $3, $4) RETURNING *',
-            [name, description, location, image_url]
+            'INSERT INTO destinations (destination, start_date, end_date, duration_days, traveler_name, traveler_age, traveler_gender, traveler_nationality, accommodation_type, accommodation_cost, transportation_type, transportation_cost, embedding) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *',
+            [destination, startDate, endDate, durationDays, travelerName, travelerAge, travelerGender, travelerNationality, accommodationType, accommodationCost, transportationType, transportationCost, embedding]
         );
     } catch (error) {
         throw error;
@@ -32,11 +51,30 @@ const createDestination = async (name, description, location, image_url) => {
 };
 
 // Update destination
-const updateDestination = async (id, name, description, location, image_url) => {
+const updateDestination = async (trip) => {
     try {
+        const {
+            id,
+            destination,
+            startDate,
+            endDate,
+            durationDays,
+            travelerName,
+            travelerAge,
+            travelerGender,
+            travelerNationality,
+            accommodationType,
+            accommodationCost,
+            transportationType,
+            transportationCost
+        } = trip;
+
+        const description = `${destination}, ${accommodationType}, ${transportationType}`;
+        const embedding = await generateEmbedding(description);
+
         return await db.oneOrNone(
-            'UPDATE destinations SET name = $2, description = $3, location = $4, image_url = $5 WHERE id = $1 RETURNING *',
-            [id, name, description, location, image_url]
+            'UPDATE destinations SET destination = $2, start_date = $3, end_date = $4, duration_days = $5, traveler_name = $6, traveler_age = $7, traveler_gender = $8, traveler_nationality = $9, accommodation_type = $10, accommodation_cost = $11, transportation_type = $12, transportation_cost = $13, embedding = $14 WHERE id = $1 RETURNING *',
+            [id, destination, startDate, endDate, durationDays, travelerName, travelerAge, travelerGender, travelerNationality, accommodationType, accommodationCost, transportationType, transportationCost, embedding]
         );
     } catch (error) {
         throw error;
@@ -55,7 +93,7 @@ const deleteDestination = async (id) => {
 const searchDestinations = async (queryEmbedding) => {
     try {
         return await db.any(`
-            SELECT id, name, description, (embedding <-> $1::vector) AS distance
+            SELECT id, destination, (embedding <-> $1::vector) AS distance
             FROM destinations
             ORDER BY distance ASC
             LIMIT 10;

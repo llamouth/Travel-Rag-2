@@ -38,9 +38,8 @@ const getDestinationById = async (req, res) => {
 // Create a new destination
 const createDestination = async (req, res) => {
     try {
-        const { name, description, location, image_url } = req.body;
-        const newDestination = await createDestinationQuery(name, description, location, image_url);
-        res.status(201).json({ message: 'Destination created successfully', destination: newDestination });
+        const newDestination = await createDestinationQuery(req.body);
+        res.status(201).json({destination: newDestination });
     } catch (error) {
         console.error('Error creating destination:', error);
         res.status(500).json({ error: 'Internal server error' });
@@ -50,11 +49,9 @@ const createDestination = async (req, res) => {
 // Update destination
 const updateDestination = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { name, description, location, image_url } = req.body;
-        const updatedDestination = await updateDestinationQuery(id, name, description, location, image_url);
+        const updatedDestination = await updateDestinationQuery(req.body);
         if (updatedDestination) {
-            res.status(200).json({ message: 'Destination updated successfully', destination: updatedDestination });
+            res.status(200).json({ destination: updatedDestination });
         } else {
             res.status(404).json({ error: 'Destination not found' });
         }
