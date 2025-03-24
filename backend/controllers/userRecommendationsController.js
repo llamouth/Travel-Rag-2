@@ -38,7 +38,6 @@ const getUserRecommendationsById = async (req, res) => {
 
     const userPreferenceEmbedding = await generateEmbedding(preferencesText);
 
-    
     const geminiText = await geminiAi(userPreferences)
 
     // Parse Gemini recommendations 

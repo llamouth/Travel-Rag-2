@@ -25,24 +25,29 @@ CREATE TABLE IF NOT EXISTS user_preferences (
     vacation_budget INTEGER,
     location VARCHAR(255),
     favorite_season VARCHAR(255),
-    preferences_embedding vector(768) -- Embedding vector 
+    start_date DATE,
+    end_date DATE,
+    duration_days INTEGER,
+    accommodation_type VARCHAR(255),
+    transportation_type VARCHAR(255),
+    traveler_age INTEGER,
+    traveler_gender VARCHAR(10),
+    traveler_nationality VARCHAR(255),
+    pets BOOLEAN,
+    environmental_concerns BOOLEAN,
+    travel_frequency VARCHAR(255),
+    income INTEGER,
+    education_level VARCHAR(255),
+    embedding vector(768) -- Embedding vector
 );
 
 CREATE TABLE IF NOT EXISTS destinations (
     id SERIAL PRIMARY KEY,
     destination VARCHAR(255) NOT NULL,
-    start_date DATE,
-    end_date DATE,
-    duration_days INT,
-    traveler_name VARCHAR(255),
-    traveler_age INT,
-    traveler_gender VARCHAR(10),
-    traveler_nationality VARCHAR(255),
-    accommodation_type VARCHAR(255),
-    accommodation_cost DECIMAL,
-    transportation_type VARCHAR(255),
-    transportation_cost DECIMAL,
-    embedding vector(768) -- Embedding for destination or trip description
+    embedding vector(768),
+    search_terms VARCHAR[],
+    similarity_terms VARCHAR[],
+    description TEXT
 );
 
 CREATE TABLE IF NOT EXISTS user_recommendations (

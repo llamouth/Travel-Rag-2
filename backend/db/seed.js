@@ -4,6 +4,7 @@ const generateEmbedding = require('../utils/generateEmbedding');
 const fs = require('fs').promises;
 const path = require('path');
 const csv = require('csv-parser');
+const destinations = require('./data/destinations.json')
 
 async function seedDatabase() {
     try {
@@ -17,45 +18,42 @@ async function seedDatabase() {
         console.log('Users seeded successfully!');
 
         // Seed destinations data
-        const destinationsData = await fs.readFile(path.join(__dirname, 'data', 'destinations.csv'), 'utf8');
-        const destinationRows = destinationsData.split('\n').slice(1);
 
         let destinationsCount = 0;
-        
-        for (const row of destinationRows) {
-            const values = row.split(',');
-            
-            if (values.length === 13) {
-                const [
-                    trip_id,
-                    destinations,
-                    startDate,
-                    endDate,
-                    durationDays,
-                    travelerName,
-                    travelerAge,
-                    travelerGender,
-                    travelerNationality,
-                    accommodationType,
-                    accommodationCost,
-                    transportationType,
-                    transportationCost
-                ] = values;
 
-                const description = `${destinations}, ${accommodationType}, ${transportationType}`;
-                const embedding = await generateEmbedding(description);
+        for (const destination of destinations) {
+            const {
+                destination: destinationName,
+                search_terms,
+                similarity_terms,
+                description,
+            } = destination;
 
-                if (embedding) {
-                    await db.none(`
-                        INSERT INTO destinations (destination, start_date, end_date, duration_days, traveler_name, traveler_age, traveler_gender, traveler_nationality, accommodation_type, accommodation_cost, transportation_type, transportation_cost, embedding) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
-                        [destinations, startDate, endDate, durationDays, travelerName, travelerAge, travelerGender, travelerNationality, accommodationType, accommodationCost, transportationType, transportationCost, embedding]
-                    );
-                    destinationsCount++;
-                }
+            const textForEmbedding = `${destinationName}, ${search_terms.join(', ')}, ${similarity_terms.join(', ')}`;
+            const embedding = await generateEmbedding(textForEmbedding);
+
+            if (embedding) {
+                await db.none(
+                    `
+                    INSERT INTO destinations (
+                        destination, search_terms, similarity_terms, description, embedding
+                    ) VALUES (
+                        $1, $2, $3, $4, $5
+                    )
+                    `,
+                    [
+                        destinationName,
+                        search_terms,
+                        similarity_terms,
+                        description,
+                        embedding,
+                    ]
+                );
+                destinationsCount++;
             }
         }
 
-        console.log(`Seeded ${destinationsCount} destinations.`);  
+        console.log(`Seeded ${destinationsCount} destinations.`);
 
         // Seed kaggle_data (as before)
         const kaggleData = await fs.readFile(path.join(__dirname, 'data', 'mountains_vs_beaches_preferences.csv'), 'utf8');
@@ -87,47 +85,28 @@ async function seedDatabase() {
 
         console.log(`Kaggle data seeded successfully! ${kaggleCount} rows inserted.`);
 
-
-
         // Seed user_preferences with embeddings
         const userPreferences = [
-            {
-              user_id: 1,
-              preferred_activities: 'hiking',
-              vacation_budget: 5000,
-              location: 'mountains',
-              favorite_season: 'summer',
-            },
-            {
-              user_id: 2,
-              preferred_activities: 'swimming',
-              vacation_budget: 3000,
-              location: 'beaches',
-              favorite_season: 'summer',
-            },
+            { user_id: 1, preferred_activities: 'hiking', vacation_budget: 5000, location: 'mountains', favorite_season: 'summer', start_date: '2024-07-01', end_date: '2024-07-15', duration_days: 14, accommodation_type: 'Hotel', transportation_type: 'Car', traveler_age: 30, traveler_gender: 'Male', traveler_nationality: 'American', pets: false, environmental_concerns: true, travel_frequency: 'Monthly', income: 60000, education_level: 'Bachelor'},
+            { user_id: 2, preferred_activities: 'swimming', vacation_budget: 3000, location: 'beaches', favorite_season: 'summer', start_date: '2024-08-01', end_date: '2024-08-07', duration_days: 7, accommodation_type: 'Villa', transportation_type: 'Flight', traveler_age: 25, traveler_gender: 'Female', traveler_nationality: 'Canadian', pets: true, environmental_concerns: false, travel_frequency: 'Yearly', income: 45000, education_level: 'Associate' },
         ];
-          
+
         for (const preference of userPreferences) {
             const embedding = await generateEmbedding(
-              `${preference.preferred_activities} ${preference.vacation_budget} ${preference.location} ${preference.favorite_season}`
+                `${preference.preferred_activities} ${preference.vacation_budget} ${preference.location} ${preference.favorite_season} ${preference.start_date} ${preference.end_date} ${preference.accommodation_type} ${preference.transportation_type}`
             );
+
             if (embedding) {
-              await db.none(
-                `
-                INSERT INTO user_preferences (user_id, preferred_activities, vacation_budget, location, favorite_season, preferences_embedding)
-                VALUES ($1, $2, $3, $4, $5, $6)
-                `,
-                [
-                  preference.user_id,
-                  preference.preferred_activities,
-                  preference.vacation_budget,
-                  preference.location,
-                  preference.favorite_season,
-                  embedding,
-                ]
-              );
+                await db.none(
+                    `
+                    INSERT INTO user_preferences (user_id, preferred_activities, vacation_budget, location, favorite_season, start_date, end_date, duration_days, accommodation_type, transportation_type, traveler_age, traveler_gender, traveler_nationality, pets, environmental_concerns, travel_frequency, income, education_level, embedding)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
+                    `,
+                    [ preference.user_id, preference.preferred_activities, preference.vacation_budget, preference.location, preference.favorite_season, preference.start_date, preference.end_date, preference.duration_days, preference.accommodation_type, preference.transportation_type, preference.traveler_age, preference.traveler_gender, preference.traveler_nationality, preference.pets, preference.environmental_concerns, preference.travel_frequency, preference.income, preference.education_level, embedding ]
+                );
             }
         }
+
         console.log('User preferences seeded successfully!');
 
         // Seed user_favorites (as before)
