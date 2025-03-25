@@ -24,14 +24,14 @@ const getUserPreferencesById = async (id) => {
 // Create user preferences
 const createUserPreferences = async (user) => {
     try {
-        const {user_id, preferred_activities, vacation_budget, location, favorite_season, start_date, end_date, duration_days, accommodation_type, transportation_type, traveler_age, traveler_gender, traveler_nationality, pets, environmental_concerns, travel_frequency, income, education_level } = user;
+        const { user_id, preferred_activities, travel_style, interests, specific_keywords, budget, preferred_season, location_type, accommodation_type, transportation_type } = user;
 
-        const preferencesText = `${preferred_activities} ${vacation_budget} ${location} ${favorite_season} ${start_date} ${end_date} ${accommodation_type} ${transportation_type}`;
+        const preferencesText = `${preferred_activities} ${travel_style} ${interests} ${specific_keywords} ${budget} ${preferred_season} ${location_type} ${accommodation_type} ${transportation_type}`;
         const embedding = await generateEmbedding(preferencesText);
 
         return await db.one(
-            'INSERT INTO user_preferences (user_id, preferred_activities, vacation_budget, location, favorite_season, start_date, end_date, duration_days, accommodation_type, transportation_type, traveler_age, traveler_gender, traveler_nationality, pets, environmental_concerns, travel_frequency, income, education_level, embedding) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19) RETURNING *',
-            [ user_id, preferred_activities, vacation_budget, location, favorite_season, start_date, end_date, duration_days, accommodation_type, transportation_type, traveler_age, traveler_gender, traveler_nationality, pets, environmental_concerns, travel_frequency, income, education_level, embedding ]
+            'INSERT INTO user_preferences (user_id, preferred_activities, travel_style, interests, specific_keywords, budget, preferred_season, location_type, accommodation_type, transportation_type, embedding) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
+            [ user_id, preferred_activities, travel_style, interests, specific_keywords, budget, preferred_season, location_type, accommodation_type, transportation_type, embedding ]
         );
     } catch (error) {
         throw error;
@@ -41,11 +41,11 @@ const createUserPreferences = async (user) => {
 // Update user preferences
 const updateUserPreferences = async (user) => {
     try {
-        const { user_id, preferred_activities, vacation_budget, location, favorite_season, start_date, end_date, duration_days, accommodation_type, transportation_type, traveler_age, traveler_gender, traveler_nationality, pets, environmental_concerns, travel_frequency, income, education_level, embedding } = user;
+        const { user_id, preferred_activities, travel_style, interests, specific_keywords, budget, preferred_season, location_type, accommodation_type, transportation_type, embedding } = user;
 
         return await db.oneOrNone(
-            'UPDATE user_preferences SET preferred_activities = $2, vacation_budget = $3, location = $4, favorite_season = $5, start_date = $6, end_date = $7, duration_days = $8, accommodation_type = $9, transportation_type = $10, traveler_age = $11, traveler_gender = $12, traveler_nationality = $13, pets = $14, environmental_concerns = $15, travel_frequency = $16, income = $17, education_level = $18, embedding = $19 WHERE user_id = $1 RETURNING *',
-            [ user_id, preferred_activities, vacation_budget, location, favorite_season, start_date, end_date, duration_days, accommodation_type, transportation_type, traveler_age, traveler_gender, traveler_nationality, pets, environmental_concerns, travel_frequency, income, education_level, embedding ]
+            'UPDATE user_preferences SET preferred_activities = $2, travel_style = $3, interests = $4, specific_keywords = $5, budget = $6, preferred_season = $7, location_type = $8, accommodation_type = $9, transportation_type = $10, embedding = $11 WHERE user_id = $1 RETURNING *',
+            [ user_id, preferred_activities, travel_style, interests, specific_keywords, budget, preferred_season, location_type, accommodation_type, transportation_type, embedding ]
         );
     } catch (error) {
         throw error;

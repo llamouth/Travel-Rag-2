@@ -22,23 +22,15 @@ CREATE TABLE IF NOT EXISTS user_preferences (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     preferred_activities VARCHAR(255),
-    vacation_budget INTEGER,
-    location VARCHAR(255),
-    favorite_season VARCHAR(255),
-    start_date DATE,
-    end_date DATE,
-    duration_days INTEGER,
+    travel_style VARCHAR(255),
+    interests VARCHAR(255),
+    specific_keywords VARCHAR(255),
+    budget VARCHAR(255),
+    preferred_season VARCHAR(255),
+    location_type VARCHAR(255),
     accommodation_type VARCHAR(255),
     transportation_type VARCHAR(255),
-    traveler_age INTEGER,
-    traveler_gender VARCHAR(10),
-    traveler_nationality VARCHAR(255),
-    pets BOOLEAN,
-    environmental_concerns BOOLEAN,
-    travel_frequency VARCHAR(255),
-    income INTEGER,
-    education_level VARCHAR(255),
-    embedding vector(768) -- Embedding vector
+    embedding vector(768) 
 );
 
 CREATE TABLE IF NOT EXISTS destinations (

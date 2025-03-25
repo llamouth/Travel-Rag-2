@@ -29,29 +29,15 @@ const getUserRecommendationsById = async (req, res) => {
   try {
     const { id } = req.params;
     const userPreferences = await getUserPreferencesById(id);
-    
+
     if (!userPreferences) {
       return res.status(404).json({ error: 'User preferences not found' });
     }
-    
-    const preferencesText = `${userPreferences.preferred_activities} ${userPreferences.vacation_budget} ${userPreferences.location} ${userPreferences.favorite_season}`;
 
-    const userPreferenceEmbedding = await generateEmbedding(preferencesText);
+    // 2. Database and Vector Search (using destinations table)
+    const destinationResults = await searchDestinations(userPreferences.embedding); 
 
-    const geminiText = await geminiAi(userPreferences)
-
-    // Parse Gemini recommendations 
-    const geminiRecommendations = parseGeminiRecommendations(geminiText); // Parse Gemini's output
-
-    // 2. Database and Vector Search
-    const kaggleDataResults = (await searchKaggleData(userPreferenceEmbedding)).slice(0, 5);
-
-    // 3. Combine and Rank Results
-    const combinedResults = { gemini: geminiRecommendations, kaggle: kaggleDataResults }
-
-    const topRecommendations = combinedResults;
-
-    res.status(200).json(topRecommendations);
+    res.status(200).json(destinationResults);
   } catch (error) {
       console.error('Error generating recommendations:', error);
       res.status(500).json({ error: 'Internal server error' });
