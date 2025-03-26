@@ -33,7 +33,7 @@ const userPreferencesById = async (req, res) => {
 const newUserPreferences = async (req, res) => {
     try {
         const { id } = req.params
-        const newUserPreferences = await createUserPreferences(req.body);
+        const newUserPreferences = await createUserPreferences({ id, ...req.body });
         res.status(201).json({ userPreferences: newUserPreferences });
     } catch (error) {
         console.error('Error creating user preferences:', error);
@@ -45,7 +45,7 @@ const newUserPreferences = async (req, res) => {
 const updatedUserPreferences = async (req, res) => {
     try {
         const { id } = req.params;
-        const newUserPreferences = await updateUserPreferences(req.body);
+        const newUserPreferences = await updateUserPreferences({ id, ...req.body });
         if (newUserPreferences) {
             res.status(200).json({ userPreferences: newUserPreferences });
         } else {
