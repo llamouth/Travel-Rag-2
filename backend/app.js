@@ -8,12 +8,15 @@ const userPreferencesRoute = require('./routes/usersPreferences')
 const userRecommendationsRoute = require('./routes/userRecommendations')
 const kaggleDataRoute = require('./routes/kaggleData')
 const userFavoritesRoute = require('./routes/userFavorites')
+const geminiRoute = require('./routes/gemini')
+
 
 app.use(express.json())
 app.use(cors())
 
 app.use('/users', usersRoute)
 app.use('/destinations', destinationsRoute)
+app.use('/gemini', geminiRoute)
 app.use('/userPreferences', userPreferencesRoute)
 app.use('/userRecommendations', userRecommendationsRoute)
 app.use('/kaggleData', kaggleDataRoute)

@@ -1,6 +1,6 @@
 // queries/destinationQueries.js
 const db = require('../db/dbConfig');
-const {generateEmbedding} = require('../utils/generateEmbedding')
+const generateEmbedding = require('../utils/generateEmbedding')
 
 // Get all destinations
 const getAllDestinations = async () => {
