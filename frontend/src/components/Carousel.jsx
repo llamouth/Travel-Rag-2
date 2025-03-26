@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import DestinationCard from './DestinationCard';
 import { Button } from '@/components/ui/button';
+import { motion, AnimatePresence } from 'motion/react';
 
 function Carousel({ recommendations }) {
-    console.log(recommendations)
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleNext = () => {
@@ -35,33 +35,60 @@ function Carousel({ recommendations }) {
                     />
                 </svg>
             </Button>
-            <div className="flex items-center justify-center w-full">
+            <div className="flex items-center justify-center w-full gap-1">
                 <div className="w-1/4 relative">
-                    {recommendations.length > 0 && (
-                        <DestinationCard
-                            recommendation={recommendations[(currentIndex - 1 + recommendations.length) % recommendations.length]}
-                            key={(currentIndex - 1 + recommendations.length) % recommendations.length}
-                            className="h-[400px]" // Adjust height as needed
-                        />
-                    )}
+                    <AnimatePresence initial={false} mode="wait">
+                        {recommendations.length > 0 && (
+                            <motion.div
+                                key={(currentIndex - 1 + recommendations.length) % recommendations.length}
+                                initial={{ opacity: 0, x: -100 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 100 }}
+                                transition={{ duration: 0.3 }}
+                                className="h-[400px]"
+                            >
+                                <DestinationCard
+                                    recommendation={recommendations[(currentIndex - 1 + recommendations.length) % recommendations.length]}
+                                />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
                 <div className="w-1/2 relative z-10">
-                    {recommendations.length > 0 && (
-                        <DestinationCard
-                            recommendation={recommendations[currentIndex]}
-                            key={currentIndex}
-                            className="h-[450px]" // Adjust height as needed
-                        />
-                    )}
+                    <AnimatePresence initial={false} mode="wait">
+                        {recommendations.length > 0 && (
+                            <motion.div
+                                key={currentIndex}
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -50 }}
+                                transition={{ duration: 0.3 }}
+                                className="h-[450px]"
+                            >
+                                <DestinationCard
+                                    recommendation={recommendations[currentIndex]}
+                                />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
                 <div className="w-1/4 relative">
-                    {recommendations.length > 0 && (
-                        <DestinationCard
-                            recommendation={recommendations[(currentIndex + 1) % recommendations.length]}
-                            key={(currentIndex + 1) % recommendations.length}
-                            className="h-[400px]" // Adjust height as needed
-                        />
-                    )}
+                    <AnimatePresence initial={false} mode="wait">
+                        {recommendations.length > 0 && (
+                            <motion.div
+                                key={(currentIndex + 1) % recommendations.length}
+                                initial={{ opacity: 0, x: 100 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -100 }}
+                                transition={{ duration: 0.3 }}
+                                className="h-[400px]"
+                            >
+                                <DestinationCard
+                                    recommendation={recommendations[(currentIndex + 1) % recommendations.length]}
+                                />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
             <Button

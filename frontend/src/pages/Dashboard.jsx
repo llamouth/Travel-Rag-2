@@ -47,7 +47,6 @@ function Dashboard() {
                     <Button className="px-6 py-3">Edit Preferences</Button>
                 </Link>
             </div>
-            <SearchBar className="w-full max-w-md" /> {/* Limit search bar width */}
             <div className="w-full"> {/* Carousel container to take full width */}
                 <Carousel recommendations={recommendations} />
             </div>

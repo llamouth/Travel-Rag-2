@@ -1,46 +1,77 @@
-// src/components/SearchBar.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { searchDestinations, searchKaggleData } from '@/lib/api';
+import { searchDestinations } from '@/lib/api';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function SearchBar() {
-  const [query, setQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+    const [query, setQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleSearch = async () => {
-    try {
-      const destinationResults = await searchDestinations(query);
-      const kaggleResults = await searchKaggleData(query);
-      setSearchResults([...kaggleResults]);
-    } catch (error) {
-      console.error('Search error:', error);
-    }
-  };
+    useEffect(() => {
+        const fetchSuggestions = async () => {
+            if (query) {
+                try {
+                    const results = await searchDestinations(query);
+                    setSearchResults(results);
+                    setShowSuggestions(true);
+                } catch (error) {
+                    console.error('Search error:', error);
+                }
+            } else {
+                setSearchResults([]);
+                setShowSuggestions(false);
+            }
+        };
 
-  return (
-    <div className="flex space-x-2 mb-4">
-      <Input
-        type="text"
-        placeholder="Search destinations..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <Button onClick={handleSearch}>Search</Button>
-      {searchResults.length > 0 && (
-        <div className="mt-4">
-          <h2>Search Results</h2>
-          <ul>
-            {searchResults.map((result) => (
-              <li key={result.id}>
-                {result.name} - {result.description}
-              </li>
-            ))}
-          </ul>
+        const delayDebounce = setTimeout(() => {
+            fetchSuggestions();
+        }, 300); // 300ms delay
+
+        console.log(searchResults)
+        return () => clearTimeout(delayDebounce);
+    }, [query]);
+
+  const handleResultClick = (result) => {
+        navigate(`/destination/${result.id}`, { state: { recommendation: { destination: result.destination } } });
+        setQuery('');
+        setSearchResults([]);
+        setShowSuggestions(false);
+    };
+
+    return (
+        <div className="relative w-full"> {/* Relative positioning for suggestions */}
+            <div className="flex items-center space-x-2 w-full">
+                <Input
+                    type="text"
+                    placeholder="Search destinations..."
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    className="flex-grow rounded-md"
+                    onFocus={() => setShowSuggestions(true)}
+                    onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                />
+                <Button onClick={() => handleResultClick(searchResults[0])} className="rounded-md">Search</Button>
+            </div>
+            {showSuggestions && searchResults.length > 0 && (
+                <div className="mt-2 w-full bg-white rounded-md shadow-md p-2 absolute top-full left-0  text-black z-50">
+                    <ul className="list-none p-0 m-0">
+                        {searchResults.map((result) => (
+                            <li
+                                key={result.id}
+                                className="p-2 hover:bg-gray-100 cursor-pointer rounded-md"
+                                onClick={() => handleResultClick(result)}
+                            >
+                                {result.destination} 
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 }
 
 export default SearchBar;

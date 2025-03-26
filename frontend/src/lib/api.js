@@ -113,3 +113,14 @@ export const fetchUser = async (id) => {
     throw error;
   }
 };
+
+export const fetchGeminiDetails = async (destination) => { 
+  try {
+    const response = await axios.get(`${API_BASE_URL}/gemini/${destination}`);
+    return response.data;
+  }catch (error) {
+    throw error;
+  }
+};
+
+

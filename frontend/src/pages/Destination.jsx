@@ -1,13 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { fetchGeminiDetails } from '../lib/api'; // Import fetchGeminiDetails
 
 function DestinationPage() {
     const location = useLocation();
     const navigate = useNavigate();
-    const recommendation = location.state?.recommendation;
+    const destinationName = location.state?.recommendation?.destination; // Extract destination name
+    const [destinationDetails, setDestinationDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    console.log(location)
 
-    if (!recommendation) {
+    useEffect(() => {
+        const fetchDetails = async () => {
+            if (destinationName) {
+                try {
+                    const details = await fetchGeminiDetails(destinationName);
+                    setDestinationDetails(details);
+                    setLoading(false);
+                } catch (err) {
+                    setError(err);
+                    setLoading(false);
+                }
+            } else {
+                setLoading(false);
+                setError('No destination name provided.');
+            }
+        };
+
+        fetchDetails();
+    }, [destinationName]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message || error}</div>;
+    }
+
+    if (!destinationDetails) {
         return <div>Destination not found.</div>;
     }
 
@@ -21,9 +54,15 @@ function DestinationPage() {
             <button onClick={() => navigate(-1)} className="mb-4">
                 Back
             </button>
-            <h1 className="text-3xl font-bold mb-4">{recommendation.name}</h1>
-            <p className="text-lg text-gray-600 mb-4">{recommendation.category}</p>
-            <p className="mb-4">{recommendation.description}</p>
+            <h1 className="text-3xl font-bold mb-4">{destinationName}</h1> {/* Display destination name */}
+            <p className="mb-4">{destinationDetails.description?.description}</p>
+            <h2 className='font-bold text-xl'>Cities</h2>
+            {destinationDetails.cities?.map((city, index) => (
+                <p key={index}>{city.city}</p>
+            ))}
+            <h2 className='font-bold text-xl'>Best Time to Visit</h2>
+            <p>{destinationDetails.bestTime?.bestTime}</p>
+            <p>{destinationDetails.bestTime?.explanation}</p>
             {/* Display image and other details */}
         </motion.div>
     );

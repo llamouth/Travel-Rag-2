@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 import Preferences from './pages/Preferences';
 import SimilarUsers from './pages/SimilarUsers';
 import { UserProvider} from './context/userContext'
+import DestinationPage from './pages/Destination';
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
             path="/sign-up"
             element={!isLoggedIn ? <SignUp setIsLoggedIn={ setIsLoggedIn } /> : <Dashboard />}
           />
+          <Route path='/destination/:id' element={<DestinationPage/> } />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>
       </UserProvider>
