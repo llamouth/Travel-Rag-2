@@ -12,7 +12,7 @@ function SearchBar() {
     try {
       const destinationResults = await searchDestinations(query);
       const kaggleResults = await searchKaggleData(query);
-      setSearchResults([...destinationResults, ...kaggleResults]);
+      setSearchResults([...kaggleResults]);
     } catch (error) {
       console.error('Search error:', error);
     }

@@ -6,17 +6,19 @@ function NavBar({ isLoggedIn, onLogout }) {
   
   const id = localStorage.getItem('userId');
 
+
+
+
   return (
     <nav className="bg-gray-800 p-4 text-white flex justify-between items-center">
       <Link to="/" className="text-lg font-semibold">
-        Travel Recommendations
+        Entirary
       </Link>
       <div className="flex items-center space-x-4">
         {isLoggedIn ? (
           <>
             <Link to={`/dashboard?userId=${id}`}>Dashboard</Link>
-            <Link to="/search">Search</Link>
-            <Link to="/profile">Profile</Link>
+            <Link to={`/similar-users/${id}`}>Similar Users</Link>
             <button onClick={onLogout}>Logout</button>
           </>
         ) : (

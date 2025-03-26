@@ -8,7 +8,9 @@ import SignUp from './pages/SignUp';
 import SearchResults from './pages/SearchResults';
 import NavBar from './components/NavBar';
 import Preferences from './pages/Preferences';
-import axios from 'axios';
+import SimilarUsers from './pages/SimilarUsers';
+import { UserProvider} from './context/userContext'
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,26 +40,28 @@ function App() {
 
   return (
     <div>
-      <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route
-          path="/dashboard"
-          element={isLoggedIn ? <Dashboard /> : <Login onLogin={handleLogin} />}
-        />
-        <Route path="/search" element={<SearchResults />} />
+      <UserProvider>
+        <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+        <Routes>
+          <Route path="/" element={<Welcome isLoggedIn={ isLoggedIn} />} />
+          <Route
+            path="/dashboard"
+            element={isLoggedIn ? <Dashboard /> : <Login onLogin={handleLogin} />}
+          />
+          <Route path="/similar-users/:id" element={ <SimilarUsers/> } />
 
-        <Route path="/preferences/:id" element={<Preferences />} />
-        <Route
-          path="/login"
-          element={!isLoggedIn ? <Login onLogin={handleLogin} /> : <Dashboard />}
-        />
-        <Route
-          path="/sign-up"
-          element={!isLoggedIn ? <SignUp setIsLoggedIn={ setIsLoggedIn } /> : <Dashboard />}
-        />
-        <Route path="*" element={<div>404 Not Found</div>} />
-      </Routes>
+          <Route path="/preferences/:id" element={<Preferences />} />
+          <Route
+            path="/login"
+            element={!isLoggedIn ? <Login onLogin={handleLogin} /> : <Dashboard />}
+          />
+          <Route
+            path="/sign-up"
+            element={!isLoggedIn ? <SignUp setIsLoggedIn={ setIsLoggedIn } /> : <Dashboard />}
+          />
+          <Route path="*" element={<div>404 Not Found</div>} />
+        </Routes>
+      </UserProvider>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '@/lib/api';
+import { useUser } from '@/context/userContext';
 
 function SignUp({setIsLoggedIn}) {
   const [user, setUser] = useState({
@@ -24,6 +25,7 @@ function SignUp({setIsLoggedIn}) {
     try {
       const newUser = await createUser(user);
       setIsLoggedIn(true);
+      setUser(newUser.user)
       localStorage.setItem('token', newUser.token);
       localStorage.setItem('userId', newUser.user.id);
       navigate(`/preferences/${newUser.user.id}`);

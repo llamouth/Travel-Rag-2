@@ -74,3 +74,42 @@ export const createRecommendations = async (userId) => {
     throw error;
   }
 };
+
+export const getUserPreferences = async (userId) => { 
+  try {
+    const response = await axios.get(`${API_BASE_URL}/userPreferences/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+export async function fetchPhotosUnsplash(product) {
+  const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+  const UNSPLASH_URL = 'https://api.unsplash.com/search/photos';
+    try {
+      const response = await axios.get(UNSPLASH_URL, {
+        params: {
+          query: product,
+          client_id: UNSPLASH_ACCESS_KEY,
+          per_page: 1 // Number of photos per request (you can adjust this)
+        }
+      });
+  
+      // Access the photos from the response
+      return response.data.results;
+    } catch (error) {
+      console.error('Error fetching photos:', error);
+      return [];
+    }
+}
+
+export const fetchUser = async (id) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/users/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

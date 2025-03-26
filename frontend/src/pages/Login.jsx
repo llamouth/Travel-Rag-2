@@ -5,6 +5,7 @@ import { loginUser } from '@/lib/api';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useUser } from '@/context/userContext';
 
 function Login({ onLogin }) {
   const [user, setUser] = useState({
@@ -13,12 +14,15 @@ function Login({ onLogin }) {
   });
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const { setUserData } = useUser();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null); // Clear previous errors
     try {
       const response = await loginUser(user);
+      setUserData(response.user);
       localStorage.setItem('token', response.token);
       onLogin(response.token);
       localStorage.setItem('userId', response.user.id);
