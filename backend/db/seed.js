@@ -63,35 +63,35 @@ async function seedDatabase() {
 
         console.log(`Seeded ${destinationsCount} destinations.`);
 
-        // Seed kaggle_data (as before)
-        const kaggleData = await fs.readFile(path.join(__dirname, 'data', 'mountains_vs_beaches_preferences.csv'), 'utf8');
-        const rows = kaggleData.split('\n').slice(1);
+        // // Seed kaggle_data (as before)
+        // const kaggleData = await fs.readFile(path.join(__dirname, 'data', 'mountains_vs_beaches_preferences.csv'), 'utf8');
+        // const rows = kaggleData.split('\n').slice(1);
 
-        let kaggleCount = 0;
+        // let kaggleCount = 0;
 
-        for (const row of rows) {
-            const values = row.split(',');
+        // for (const row of rows) {
+        //     const values = row.split(',');
 
-            if (values.length === 14) {
-                const userText = values.join(',');
-                const embedding = await generateEmbedding(userText);
+        //     if (values.length === 14) {
+        //         const userText = values.join(',');
+        //         const embedding = await generateEmbedding(userText);
 
-                if (embedding) {
-                    const petsBoolean = values[11] === '1';
-                    const envConcernsBoolean = values[12] === '1';
-                    const preferenceBoolean = values[13] === '1';
+        //         if (embedding) {
+        //             const petsBoolean = values[11] === '1';
+        //             const envConcernsBoolean = values[12] === '1';
+        //             const preferenceBoolean = values[13] === '1';
 
-                    await db.none(`
-                        INSERT INTO kaggle_data (age, gender, income, education_level, travel_frequency, preferred_activities, vacation_budget, location, proximity_to_mountains, proximity_to_beaches, favorite_season, pets, environmental_concerns, preference, user_text, embedding) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)`,
-                        [ ...values.slice(0, 11), petsBoolean, envConcernsBoolean, preferenceBoolean, userText, embedding ]
-                    );
+        //             await db.none(`
+        //                 INSERT INTO kaggle_data (age, gender, income, education_level, travel_frequency, preferred_activities, vacation_budget, location, proximity_to_mountains, proximity_to_beaches, favorite_season, pets, environmental_concerns, preference, user_text, embedding) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)`,
+        //                 [ ...values.slice(0, 11), petsBoolean, envConcernsBoolean, preferenceBoolean, userText, embedding ]
+        //             );
 
-                    kaggleCount++;
-                }
-            }
-        }
+        //             kaggleCount++;
+        //         }
+        //     }
+        // }
 
-        console.log(`Kaggle data seeded successfully! ${kaggleCount} rows inserted.`);
+        // console.log(`Kaggle data seeded successfully! ${kaggleCount} rows inserted.`);
 
         // Seed user_preferences with embeddings
         const userPreferences = [

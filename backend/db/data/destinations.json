@@ -1406,5 +1406,209 @@
               "mosques"
             ],
             "description": "Known for its rich culture, rivers, and the Sundarbans mangrove forest."
+          },
+          {
+            "destination": "Jamaica",
+            "search_terms": ["Jamrock", "Kingston", "Montego Bay"],
+            "similarity_terms": ["reggae", "beaches", "rum", "mountains", "waterfalls", "culture"],
+            "description": "Known for its reggae music, beautiful beaches, and lush landscapes."
+          },
+          {
+            "destination": "Barbados",
+            "search_terms": ["Bimshire", "Bridgetown", "Barbadian"],
+            "similarity_terms": ["beaches", "rum", "cricket", "luxury", "history", "caves"],
+            "description": "Famous for its pristine beaches, rum, and cricket culture."
+          },
+          {
+            "destination": "Puerto Rico",
+            "search_terms": ["PR", "San Juan", "Borinquen"],
+            "similarity_terms": ["beaches", "history", "culture", "old town", "rainforest", "food"],
+            "description": "A vibrant island with a rich history, beautiful beaches, and a lively culture."
+          },
+          {
+            "destination": "Dominican Republic",
+            "search_terms": ["DR", "Santo Domingo", "Punta Cana"],
+            "similarity_terms": ["beaches", "history", "adventure", "resorts", "merengue", "mountains"],
+            "description": "Offers a mix of stunning beaches, historical sites, and adventure activities."
+          },
+          {
+            "destination": "Aruba",
+            "search_terms": ["One Happy Island", "Oranjestad", "ABC Islands"],
+            "similarity_terms": ["beaches", "windsurfing", "diving", "desert", "casinos", "luxury"],
+            "description": "Known for its white-sand beaches, crystal-clear waters, and constant trade winds."
+          },
+          {
+            "destination": "St. Lucia",
+            "search_terms": ["Pitons", "Castries", "Helen of the West Indies"],
+            "similarity_terms": ["volcanoes", "luxury", "rainforest", "diving", "honeymoon", "beaches"],
+            "description": "Features dramatic volcanic landscapes, luxury resorts, and lush rainforests."
+          },
+          {
+            "destination": "Bahamas",
+            "search_terms": ["Nassau", "Exumas", "Abacos"],
+            "similarity_terms": ["beaches", "diving", "islands", "pigs", "fishing", "luxury"],
+            "description": "An archipelago of over 700 islands, known for its stunning beaches and diving spots."
+          },
+          {
+            "destination": "Turks and Caicos Islands",
+            "search_terms": ["TCI", "Providenciales", "Grace Bay"],
+            "similarity_terms": ["beaches", "reefs", "diving", "luxury", "snorkeling", "relaxing"],
+            "description": "Famous for its world-class beaches, coral reefs, and luxury resorts."
+          },
+          {
+            "destination": "Grenada",
+            "search_terms": ["Spice Isle", "St. George's", "Grand Anse"],
+            "similarity_terms": ["spices", "beaches", "waterfalls", "hiking", "chocolate", "sailing"],
+            "description": "Known as the Spice Isle, famous for nutmeg production, beautiful beaches, and waterfalls."
+          },
+          {
+            "destination": "Antigua and Barbuda",
+            "search_terms": ["Antigua", "Barbuda", "St. John's"],
+            "similarity_terms": ["beaches", "sailing", "relaxing", "yachting", "carnival", "history"],
+            "description": "Famous for its 365 beaches, sailing, and a relaxed atmosphere."
+          },
+          {
+            "destination": "Curaçao",
+            "search_terms": ["Willemstad", "ABC Islands", "Dutch Caribbean"],
+            "similarity_terms": ["architecture", "beaches", "diving", "culture", "liqueur", "history"],
+            "description": "Known for its colorful Dutch architecture, beautiful beaches, and diving spots."
+          },
+          {
+            "destination": "Saint Martin",
+            "search_terms": ["St. Martin", "SXM", "Marigot", "Philipsburg"],
+            "similarity_terms": ["beaches", "shopping", "nightlife", "french", "dutch", "airplanes"],
+            "description": "Divided between France and the Netherlands, famous for its beaches, shopping, and nightlife."
+          },
+            {
+            "destination": "Trinidad and Tobago",
+            "search_terms": ["Trinidad", "Tobago", "Port of Spain"],
+            "similarity_terms": ["carnival", "birdwatching", "beaches", "culture", "food", "diving"],
+            "description": "Known for its vibrant Carnival, diverse birdlife, and beautiful beaches."
+          },
+          {
+            "destination": "Saint Kitts and Nevis",
+            "search_terms": ["St. Kitts", "Nevis", "Basseterre"],
+            "similarity_terms": ["beaches", "hiking", "history", "plantations", "volcanoes", "relaxing"],
+            "description": "Offers a blend of historical sites, lush landscapes, and tranquil beaches."
+          },
+          {
+            "destination": "Saint Vincent and the Grenadines",
+            "search_terms": ["SVG", "Kingstown", "Grenadines"],
+            "similarity_terms": ["sailing", "islands", "diving", "yachting", "beaches", "volcanoes"],
+            "description": "An archipelago known for its sailing, scenic islands, and clear waters."
+          },
+          {
+            "destination": "Guadeloupe",
+            "search_terms": ["Gwadloup", "Pointe-à-Pitre", "French Caribbean"],
+            "similarity_terms": ["french", "beaches", "hiking", "rum", "volcanoes", "culture"],
+            "description": "A French territory known for its diverse landscapes and vibrant culture."
+          },
+          {
+            "destination": "Martinique",
+            "search_terms": ["Madinina", "Fort-de-France", "French Caribbean"],
+            "similarity_terms": ["french", "beaches", "rum", "hiking", "volcanoes", "culture"],
+            "description": "A French island known for its lush landscapes and rich history."
+          },
+          {
+            "destination": "Saint Barthélemy",
+            "search_terms": ["St. Barts", "Gustavia", "Saint Barth"],
+            "similarity_terms": ["luxury", "beaches", "yachting", "shopping", "french", "exclusive"],
+            "description": "A luxurious island known for its high-end resorts and beautiful beaches."
+          },
+          {
+            "destination": "Anguilla",
+            "search_terms": ["The Valley", "British Caribbean", "AXA"],
+            "similarity_terms": ["beaches", "luxury", "relaxing", "snorkeling", "islands", "seafood"],
+            "description": "Known for its pristine beaches and tranquil atmosphere."
+          },
+          {
+            "destination": "Montserrat",
+            "search_terms": ["Emerald Isle of the Caribbean", "Plymouth", "Volcano"],
+            "similarity_terms": ["volcanoes", "hiking", "diving", "nature", "islands", "history"],
+            "description": "A volcanic island known for its dramatic landscapes and nature."
+          },
+          {
+            "destination": "British Virgin Islands",
+            "search_terms": ["BVI", "Tortola", "Virgin Gorda"],
+            "similarity_terms": ["sailing", "diving", "islands", "beaches", "yachting", "relaxing"],
+            "description": "A collection of islands known for their sailing and beautiful beaches."
+          },
+          {
+            "destination": "Cayman Islands",
+            "search_terms": ["Grand Cayman", "George Town", "Little Cayman"],
+            "similarity_terms": ["diving", "beaches", "luxury", "reefs", "financial", "relaxing"],
+            "description": "Known for its world-class diving and beautiful beaches."
+          },
+          {
+            "destination": "Saba",
+            "search_terms": ["Unspoiled Queen", "Dutch Caribbean", "The Bottom"],
+            "similarity_terms": ["diving", "hiking", "volcanoes", "nature", "islands", "peaceful"],
+            "description": "A small island known for its unspoiled nature and diving spots."
+          },
+          {
+            "destination": "Saint Eustatius",
+            "search_terms": ["Statia", "Dutch Caribbean", "Oranjestad"],
+            "similarity_terms": ["diving", "history", "hiking", "volcanoes", "islands", "peaceful"],
+            "description": "An island with a rich history and beautiful natural landscapes."
+          },
+          {
+            "destination": "Dominica",
+            "search_terms": ["Nature Isle", "Roseau", "Waitukubuli"],
+            "similarity_terms": ["hiking", "waterfalls", "diving", "rainforest", "volcanoes", "nature"],
+            "description": "Known as the 'Nature Isle' for its lush landscapes and natural beauty."
+          },
+          {
+            "destination": "Saint Croix",
+            "search_terms": ["St. Croix", "Christiansted", "USVI"],
+            "similarity_terms": ["beaches", "history", "diving", "rum", "culture", "relaxing"],
+            "description": "The largest of the U.S. Virgin Islands, known for its history and culture."
+          },
+          {
+            "destination": "Saint John",
+            "search_terms": ["St. John", "Cruz Bay", "USVI"],
+            "similarity_terms": ["beaches", "national park", "snorkeling", "hiking", "relaxing", "nature"],
+            "description": "Famous for its protected national park and beautiful beaches."
+          },
+          {
+            "destination": "Saint Thomas",
+            "search_terms": ["St. Thomas", "Charlotte Amalie", "USVI"],
+            "similarity_terms": ["beaches", "shopping", "cruises", "islands", "diving", "nightlife"],
+            "description": "A popular tourist destination known for its shopping and beaches."
+          },
+            {
+            "destination": "Nevis",
+            "search_terms": ["Charlestown", "Saint Kitts and Nevis", "Oualie Beach"],
+            "similarity_terms": ["beaches", "hiking", "history", "plantations", "volcanoes", "relaxing"],
+            "description": "A quiet and peaceful island known for its natural beauty and historical sites."
+          },
+            {
+            "destination": "Barbuda",
+            "search_terms": ["Codrington", "Antigua and Barbuda", "Pink Sand Beach"],
+            "similarity_terms": ["beaches", "birdwatching", "relaxing", "islands", "luxury", "secluded"],
+            "description": "A serene island famous for its pink sand beaches and bird sanctuary."
+          },
+          {
+            "destination": "Isla Mujeres",
+            "search_terms": ["Island of Women", "Quintana Roo", "Mexico"],
+            "similarity_terms": ["beaches", "snorkeling", "diving", "relaxing", "mexican", "islands"],
+            "description": "A small Mexican island in the Caribbean known for its relaxed atmosphere."
+          },
+          {
+            "destination": "Caye Caulker",
+            "search_terms": ["Belize", "La Isla Cariñosa", "Go Slow"],
+            "similarity_terms": ["diving", "snorkeling", "reefs", "relaxing", "islands", "backpacker"],
+            "description": "A laid-back island in Belize known for its diving and snorkeling."
+          },
+          {
+            "destination": "Roatan",
+            "search_terms": ["Honduras", "Bay Islands", "Coxen Hole"],
+            "similarity_terms": ["diving", "reefs", "beaches", "jungle", "islands", "adventure"],
+            "description": "A Honduran island famous for its diving and barrier reef."
+          },
+          {
+            "destination": "Providencia",
+            "search_terms": ["Old Providence", "Colombia", "Santa Catalina"],
+            "similarity_terms": ["diving", "reefs", "islands", "peaceful", "colombian", "culture"],
+            "description": "A Colombian island known for its untouched beauty and diving sites."
           }
 ]

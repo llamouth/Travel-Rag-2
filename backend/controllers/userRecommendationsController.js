@@ -34,7 +34,7 @@ const getUserRecommendationsById = async (req, res) => {
       return res.status(404).json({ error: 'User preferences not found' });
     }
 
-    // 2. Database and Vector Search (using destinations table)
+    // Database and Vector Search (using destinations table)
     const destinationResults = await searchDestinations(userPreferences.embedding); 
 
     res.status(200).json(destinationResults);
