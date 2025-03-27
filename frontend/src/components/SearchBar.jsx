@@ -54,7 +54,7 @@ function SearchBar() {
                 <Button onClick={() => handleResultClick(searchResults[0])} className="rounded-md">Search</Button>
             </div>
             {showSuggestions && searchResults.length > 0 && (
-                <div className="mt-2 w-full bg-white rounded-md shadow-md p-2 absolute top-full left-0  text-black z-50">
+                <div className="mt-2 w-full bg-white rounded-md shadow-md p-2 absolute top-full left-0  text-black z-[1000]">
                     <ul className="list-none p-0 m-0">
                         {searchResults.map((result) => (
                             <li

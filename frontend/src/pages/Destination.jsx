@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { fetchGeminiDetails } from '../lib/api';
+import AnimatedLoading from '@/components/AnimatedLoading';
 
 function DestinationPage() {
     const location = useLocation();
@@ -32,7 +33,7 @@ function DestinationPage() {
     }, [destinationName]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <AnimatedLoading />;
     }
 
     if (error) {

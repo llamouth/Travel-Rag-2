@@ -4,6 +4,7 @@ import { fetchRecommendations } from '@/lib/api';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useUser } from '@/context/userContext'; 
+import AnimatedLoading from '@/components/AnimatedLoading';
 
 function Dashboard() {
     const [recommendations, setRecommendations] = useState([]);
@@ -40,7 +41,7 @@ function Dashboard() {
     }, [preferences]);
 
     if (loading) {
-        return <div className="flex justify-center items-center h-screen">Loading...</div>;
+        return <AnimatedLoading />;
     }
 
     if (error) {
