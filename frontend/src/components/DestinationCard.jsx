@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { fetchPhotosUnsplash } from '@/lib/api';
+import { fetchPhotosUnsplash, updateDestinationImageUrl } from '@/lib/api'; // Import the new function
 
 function DestinationCard({ recommendation }) {
     const [imageUrl, setImageUrl] = useState('');
@@ -11,13 +11,24 @@ function DestinationCard({ recommendation }) {
     useEffect(() => {
         async function fetchImage() {
             try {
-                const response = await fetchPhotosUnsplash(recommendation.destination);
-                if (response && response.length > 0) {
-                    setImageUrl(response[0].urls.regular);
-                    setImageAlt(response[0].alt_description || recommendation.destination);
+                if (recommendation.image_url) {
+                    setImageUrl(recommendation.image_url);
+                    setImageAlt(recommendation.destination);
                 } else {
-                    setImageUrl('/placeholder-image.jpg');
-                    setImageAlt(`No image found for ${recommendation.destination}`);
+                    const response = await fetchPhotosUnsplash(recommendation.destination);
+                    if (response && response.length > 0) {
+                        const unsplashImageUrl = response[0].urls.regular;
+                        const unsplashImageAlt = response[0].alt_description || recommendation.destination;
+
+                        setImageUrl(unsplashImageUrl);
+                        setImageAlt(unsplashImageAlt);
+
+                        // Update the database with the Unsplash image URL using the new function
+                        await updateDestinationImageUrl(recommendation.id, unsplashImageUrl);
+                    } else {
+                        setImageUrl('/placeholder-image.jpg');
+                        setImageAlt(`No image found for ${recommendation.destination}`);
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching image:', error);
@@ -27,7 +38,7 @@ function DestinationCard({ recommendation }) {
         }
 
         fetchImage();
-    }, [recommendation.destination]);
+    }, [recommendation.destination, recommendation.image_url, recommendation.id]);
 
     const handleCardClick = () => {
         navigate(`/destination/${recommendation.id}`, { state: { recommendation } });
@@ -37,7 +48,7 @@ function DestinationCard({ recommendation }) {
         <motion.div
             initial={{ borderRadius: '10px' }}
             whileTap={{ scale: 0.95 }}
-            className="relative cursor-pointer w-full h-64 overflow-hidden rounded-lg" // Set a fixed height
+            className="relative cursor-pointer w-full h-64 overflow-hidden rounded-lg"
             onClick={handleCardClick}
             style={{
                 backgroundImage: `url(${imageUrl})`,

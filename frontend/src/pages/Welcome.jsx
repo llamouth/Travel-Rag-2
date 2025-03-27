@@ -1,4 +1,5 @@
 // src/pages/Welcome.jsx
+import { Button } from '@/components/ui/button';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -12,8 +13,12 @@ function Welcome() {
             <p className="mb-4">Explore personalized travel recommendations based on your preferences.</p>
             <div className="flex space-x-4">
                 {!token && <>
-                    <Link to="/login" className="bg-blue-500 text-white px-4 py-2 rounded-md">Log In</Link>
-                    <Link to="/sign-up" className="bg-green-500 text-white px-4 py-2 rounded-md">Sign Up</Link>
+                    <Link to="/login" className="">
+                        <Button className='p-4 hover:cursor-pointer'>Log In</Button>
+                    </Link>
+                    <Link to="/sign-up" className="">
+                        <Button className='p-4 bg-neutral-600 hover:cursor-pointer'>Sign Up</Button>
+                    </Link>
                 </>}
             </div>
         </div>

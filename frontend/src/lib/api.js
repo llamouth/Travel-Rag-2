@@ -1,4 +1,3 @@
-// src/lib/api.js
 import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_BASE_URL; 
@@ -88,21 +87,21 @@ export const getUserPreferences = async (userId) => {
 export async function fetchPhotosUnsplash(product) {
   const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
   const UNSPLASH_URL = 'https://api.unsplash.com/search/photos';
-    try {
-      const response = await axios.get(UNSPLASH_URL, {
-        params: {
-          query: product,
-          client_id: UNSPLASH_ACCESS_KEY,
-          per_page: 1 // Number of photos per request (you can adjust this)
-        }
-      });
-  
-      // Access the photos from the response
-      return response.data.results;
-    } catch (error) {
-      console.error('Error fetching photos:', error);
-      return [];
-    }
+  try {
+    const response = await axios.get(UNSPLASH_URL, {
+      params: {
+        query: product,
+        client_id: UNSPLASH_ACCESS_KEY,
+        per_page: 1 
+      }
+    });
+
+    // Access the photos from the response
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching photos:', error);
+    return [];
+  }
 }
 
 export const fetchUser = async (id) => {
@@ -123,4 +122,13 @@ export const fetchGeminiDetails = async (destination) => {
   }
 };
 
-
+export const updateDestinationImageUrl = async (destinationId, imageUrl) => {
+  try {
+    const response = await axios.patch(`${API_BASE_URL}/destinations/${destinationId}/image`, {
+      image_url: imageUrl,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

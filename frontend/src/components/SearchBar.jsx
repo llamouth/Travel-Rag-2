@@ -29,8 +29,6 @@ function SearchBar() {
         const delayDebounce = setTimeout(() => {
             fetchSuggestions();
         }, 300); // 300ms delay
-
-        console.log(searchResults)
         return () => clearTimeout(delayDebounce);
     }, [query]);
 

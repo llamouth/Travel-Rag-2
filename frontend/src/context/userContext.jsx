@@ -33,8 +33,10 @@ export const UserProvider = ({ children }) => {
         setPreferences(preferences);
 
         // Fetch recommendations
-        const recs = await fetchRecommendations(userId);
-        setRecommendations(recs);
+        if (preferences?.travel_style?.length) {
+          const recs = await fetchRecommendations(userId);
+          setRecommendations(recs);
+        }
 
         // Fetch user data (you'll need to create this function in api.js)
         const user = await fetchUser(userId);

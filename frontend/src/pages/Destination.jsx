@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { fetchGeminiDetails } from '../lib/api'; // Import fetchGeminiDetails
+import { fetchGeminiDetails } from '../lib/api';
 
 function DestinationPage() {
     const location = useLocation();
     const navigate = useNavigate();
-    const destinationName = location.state?.recommendation?.destination; // Extract destination name
+    const destinationName = location.state?.recommendation?.destination; 
     const [destinationDetails, setDestinationDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    console.log(location)
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -54,7 +53,7 @@ function DestinationPage() {
             <button onClick={() => navigate(-1)} className="mb-4">
                 Back
             </button>
-            <h1 className="text-3xl font-bold mb-4">{destinationName}</h1> {/* Display destination name */}
+            <h1 className="text-3xl font-bold mb-4">{destinationName}</h1> 
             <p className="mb-4">{destinationDetails.description?.description}</p>
             <h2 className='font-bold text-xl'>Cities</h2>
             {destinationDetails.cities?.map((city, index) => (
@@ -63,7 +62,6 @@ function DestinationPage() {
             <h2 className='font-bold text-xl'>Best Time to Visit</h2>
             <p>{destinationDetails.bestTime?.bestTime}</p>
             <p>{destinationDetails.bestTime?.explanation}</p>
-            {/* Display image and other details */}
         </motion.div>
     );
 }
