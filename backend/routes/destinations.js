@@ -7,6 +7,7 @@ const {
     updateDestination,
     deleteDestination,
     searchDestinations,
+    updateDestinationImageUrl,
 } = require('../controllers/destinationsController');
 
 const router = express.Router();
@@ -28,6 +29,10 @@ router.put('/:id', updateDestination);
 
 // Delete destination
 router.delete('/:id', deleteDestination);
+
+
+router.patch('/:id/image', updateDestinationImageUrl);
+
 
 
 module.exports = router;

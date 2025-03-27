@@ -39,7 +39,8 @@ CREATE TABLE IF NOT EXISTS destinations (
     embedding vector(768),
     search_terms VARCHAR[],
     similarity_terms VARCHAR[],
-    description TEXT
+    description TEXT,
+    image_url VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS user_recommendations (

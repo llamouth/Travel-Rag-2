@@ -5,6 +5,7 @@ const {
     updateDestination: updateDestinationQuery,
     deleteDestination: deleteDestinationQuery,
     searchDestinations: searchDestinationsQuery,
+    updateDestinationImageUrl: updateDestinationImageUrlQuery,
 } = require('../queries/destinationsQueries');
 const generateEmbedding  = require('../utils/generateEmbedding');
 
@@ -89,11 +90,30 @@ const searchDestinations = async (req, res) => {
     }
 };
 
+const updateDestinationImageUrl = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { image_url } = req.body;
+
+        const updatedDestination = await updateDestinationImageUrlQuery(id, image_url);
+
+        if (updatedDestination) {
+            res.status(200).json(updatedDestination);
+        } else {
+            res.status(404).json({ error: 'Destination not found' });
+        }
+    } catch (error) {
+        console.error('Error updating destination image URL:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 module.exports = {
     getAllDestinations,
     getDestinationById,
     createDestination,
     updateDestination,
     deleteDestination,
-    searchDestinations
+    searchDestinations,
+    updateDestinationImageUrl
 };

@@ -66,15 +66,16 @@ const updateDestination = async (trip) => {
             accommodationType,
             accommodationCost,
             transportationType,
-            transportationCost
+            transportationCost,
+            image_url
         } = trip;
 
         const description = `${destination}, ${accommodationType}, ${transportationType}`;
         const embedding = await generateEmbedding(description);
 
         return await db.oneOrNone(
-            'UPDATE destinations SET destination = $2, start_date = $3, end_date = $4, duration_days = $5, traveler_name = $6, traveler_age = $7, traveler_gender = $8, traveler_nationality = $9, accommodation_type = $10, accommodation_cost = $11, transportation_type = $12, transportation_cost = $13, embedding = $14 WHERE id = $1 RETURNING *',
-            [id, destination, startDate, endDate, durationDays, travelerName, travelerAge, travelerGender, travelerNationality, accommodationType, accommodationCost, transportationType, transportationCost, embedding]
+            'UPDATE destinations SET destination = $2, start_date = $3, end_date = $4, duration_days = $5, traveler_name = $6, traveler_age = $7, traveler_gender = $8, traveler_nationality = $9, accommodation_type = $10, accommodation_cost = $11, transportation_type = $12, transportation_cost = $13, embedding = $14, image_url = $15 WHERE id = $1 RETURNING *',
+            [id, destination, startDate, endDate, durationDays, travelerName, travelerAge, travelerGender, travelerNationality, accommodationType, accommodationCost, transportationType, transportationCost, embedding, image_url]
         );
     } catch (error) {
         throw error;
@@ -103,11 +104,23 @@ const searchDestinations = async (queryEmbedding) => {
     }
 };
 
+const updateDestinationImageUrl = async (id, imageUrl) => {
+    try {
+        return await db.oneOrNone(
+            'UPDATE destinations SET image_url = $2 WHERE id = $1 RETURNING *',
+            [id, imageUrl]
+        );
+    } catch (error) {
+        throw error;
+    }
+};
+
 module.exports = {
     getAllDestinations,
     getDestinationById,
     createDestination,
     updateDestination,
     deleteDestination,
-    searchDestinations
+    searchDestinations,
+    updateDestinationImageUrl
 };
