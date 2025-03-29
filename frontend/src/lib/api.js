@@ -132,3 +132,21 @@ export const updateDestinationImageUrl = async (destinationId, imageUrl) => {
     throw error;
   }
 };
+
+export const updateDestinationDetails = async (destinationId, details) => {
+  try {
+    const response = await axios.patch(`${API_BASE_URL}/destinations/${destinationId}/details`, {details});
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchDestination = async (destinationId) => { 
+  try {
+    const response = await axios.get(`${API_BASE_URL}/destinations/${destinationId}`);
+    return response.data;
+  }catch (error) {
+    throw error;
+  }
+};
