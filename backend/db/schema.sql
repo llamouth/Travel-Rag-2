@@ -36,11 +36,14 @@ CREATE TABLE IF NOT EXISTS user_preferences (
 CREATE TABLE IF NOT EXISTS destinations (
     id SERIAL PRIMARY KEY,
     destination VARCHAR(255) NOT NULL,
-    embedding vector(768),
     search_terms VARCHAR[],
     similarity_terms VARCHAR[],
     description TEXT,
-    image_url VARCHAR(255)
+    image_url VARCHAR(255),
+    cities VARCHAR[],
+    best_times VARCHAR(255),
+    best_times_explanation VARCHAR(255),
+    embedding vector(768)
 );
 
 CREATE TABLE IF NOT EXISTS user_recommendations (

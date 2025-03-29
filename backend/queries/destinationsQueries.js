@@ -67,11 +67,12 @@ const updateDestination = async (trip) => {
             accommodationCost,
             transportationType,
             transportationCost,
-            image_url
+            image_url,
+            description
         } = trip;
 
-        const description = `${destination}, ${accommodationType}, ${transportationType}`;
-        const embedding = await generateEmbedding(description);
+        const embeddingDescription = `${destination}, ${accommodationType}, ${transportationType}`;
+        const embedding = await generateEmbedding(embeddingDescription);
 
         return await db.oneOrNone(
             'UPDATE destinations SET destination = $2, start_date = $3, end_date = $4, duration_days = $5, traveler_name = $6, traveler_age = $7, traveler_gender = $8, traveler_nationality = $9, accommodation_type = $10, accommodation_cost = $11, transportation_type = $12, transportation_cost = $13, embedding = $14, image_url = $15 WHERE id = $1 RETURNING *',
@@ -115,6 +116,19 @@ const updateDestinationImageUrl = async (id, imageUrl) => {
     }
 };
 
+const updateDestinationDetails = async (id, details) => {
+    const { cities, bestTime, explanation, description } = details
+    
+    try {
+        return await db.oneOrNone(
+            'UPDATE destinations SET description = $5, cities = $2, best_times = $3, best_times_explanation = $4 WHERE id = $1 RETURNING *',
+            [id, cities, bestTime, explanation, description]
+        );
+    } catch (error) {
+        throw error;
+    }
+};
+
 module.exports = {
     getAllDestinations,
     getDestinationById,
@@ -122,5 +136,6 @@ module.exports = {
     updateDestination,
     deleteDestination,
     searchDestinations,
-    updateDestinationImageUrl
+    updateDestinationImageUrl,
+    updateDestinationDetails
 };
