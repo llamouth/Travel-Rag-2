@@ -8,7 +8,7 @@ function SearchBar() {
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchSuggestions = async () => {
@@ -40,8 +40,8 @@ function SearchBar() {
     };
 
     return (
-        <div className="relative w-full"> {/* Relative positioning for suggestions */}
-            <div className="flex items-center space-x-2 w-full">
+        <div className="relative w-full z-10"> 
+            <div className="flex items-center space-x-2 w-full selection:bg-amber-500">
                 <Input
                     type="text"
                     placeholder="Search destinations..."
@@ -54,7 +54,7 @@ function SearchBar() {
                 <Button onClick={() => handleResultClick(searchResults[0])} className="rounded-md">Search</Button>
             </div>
             {showSuggestions && searchResults.length > 0 && (
-                <div className="mt-2 w-full bg-white rounded-md shadow-md p-2 absolute top-full left-0  text-black z-[1000]">
+                <div className="mt-2 w-full bg-white rounded-md shadow-md p-2 absolute top-full left-0 text-black">
                     <ul className="list-none p-0 m-0">
                         {searchResults.map((result) => (
                             <li
@@ -62,7 +62,7 @@ function SearchBar() {
                                 className="p-2 hover:bg-gray-100 cursor-pointer rounded-md"
                                 onClick={() => handleResultClick(result)}
                             >
-                                {result.destination} 
+                                {result.destination}
                             </li>
                         ))}
                     </ul>

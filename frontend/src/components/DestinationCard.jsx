@@ -23,7 +23,6 @@ function DestinationCard({ recommendation }) {
                         setImageUrl(unsplashImageUrl);
                         setImageAlt(unsplashImageAlt);
 
-                        // Update the database with the Unsplash image URL using the new function
                         await updateDestinationImageUrl(recommendation.id, unsplashImageUrl);
                     } else {
                         setImageUrl('/placeholder-image.jpg');
@@ -48,7 +47,7 @@ function DestinationCard({ recommendation }) {
         <motion.div
             initial={{ borderRadius: '10px' }}
             whileTap={{ scale: 0.95 }}
-            className="relative cursor-pointer w-full h-64 overflow-hidden rounded-lg"
+            className="relative cursor-pointer w-full h-64 overflow-hidden rounded-lg border-4"
             onClick={handleCardClick}
             style={{
                 backgroundImage: `url(${imageUrl})`,

@@ -8,7 +8,7 @@ function Welcome() {
     const token = localStorage.getItem('token');
 
     return (
-        <div className="p-4 flex flex-col items-center justify-center">
+        <div className="p-4 flex flex-col items-center justify-center text-white">
             <h1 className="text-2xl font-bold mb-4">Welcome to Entirary</h1>
             <p className="mb-4">Explore personalized travel recommendations based on your preferences.</p>
             <div className="flex space-x-4">

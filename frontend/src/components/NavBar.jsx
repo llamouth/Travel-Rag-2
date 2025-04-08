@@ -6,7 +6,7 @@ function NavBar({ isLoggedIn, onLogout }) {
     const id = localStorage.getItem('userId');
 
     return (
-        <nav className="bg-black p-4 text-white flex justify-between items-center fixed w-screen">
+        <nav className="bg-transparent p-4 text-white flex justify-between items-center fixed w-screen">
             <Link to="/" className="text-lg font-semibold">
                 Entirary
             </Link>

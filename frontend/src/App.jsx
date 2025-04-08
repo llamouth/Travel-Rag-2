@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import Preferences from './pages/Preferences';
 import { UserProvider } from './context/userContext';
 import DestinationPage from './pages/Destination';
+import GlowyBackground from './components/GlowyBackground';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,28 +36,31 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="relative min-h-screen"> 
+      <GlowyBackground />
       <UserProvider>
-        <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-        <div className="pt-16"> 
-          <Routes>
-            <Route path="/" element={<Welcome isLoggedIn={isLoggedIn} />} />
-            <Route
-              path="/dashboard"
-              element={isLoggedIn ? <Dashboard /> : <Login onLogin={handleLogin} />}
-            />
-            <Route path="/preferences/:id" element={<Preferences />} />
-            <Route
-              path="/login"
-              element={!isLoggedIn ? <Login onLogin={handleLogin} /> : <Dashboard />}
-            />
-            <Route
-              path="/sign-up"
-              element={!isLoggedIn ? <SignUp setIsLoggedIn={setIsLoggedIn} /> : <Dashboard />}
-            />
-            <Route path="/destination/:id" element={<DestinationPage />} />
-            <Route path="*" element={<div>404 Not Found</div>} />
-          </Routes>
+        <div className="relative z-10"> 
+          <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+          <div className="pt-16">
+            <Routes>
+              <Route path="/" element={<Welcome isLoggedIn={isLoggedIn} />} />
+              <Route
+                path="/dashboard"
+                element={isLoggedIn ? <Dashboard /> : <Login onLogin={handleLogin} />}
+              />
+              <Route path="/preferences/:id" element={<Preferences />} />
+              <Route
+                path="/login"
+                element={!isLoggedIn ? <Login onLogin={handleLogin} /> : <Dashboard />}
+              />
+              <Route
+                path="/sign-up"
+                element={!isLoggedIn ? <SignUp setIsLoggedIn={setIsLoggedIn} /> : <Dashboard />}
+              />
+              <Route path="/destination/:id" element={<DestinationPage />} />
+              <Route path="*" element={<div>404 Not Found</div>} />
+            </Routes>
+          </div>
         </div>
       </UserProvider>
     </div>

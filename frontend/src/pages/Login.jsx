@@ -34,7 +34,7 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <Card className="max-w-md w-full space-y-8">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">Login</CardTitle>

@@ -30,14 +30,14 @@ function DestinationPage() {
                         } else {
                             // Details don't exist, fetch from Gemini API
                             const details = await fetchGeminiDetails(destination.destination);
-                            console.log(details)
+                            
 
                             if (details) {
                                 // Update the database with the Gemini details
                                 const newDetails = { cities: details.cities, bestTime: details.bestTime.bestTime, explanation: details.bestTime.explanation, description: details.description.description }
-                                console.log(newDetails)
+                                
                                 const updatedDestination = await updateDestinationDetails(id, newDetails);
-                                console.log(updatedDestination)
+                                
 
                                 setDestinationDetails(updatedDestination);
                                 setLoading(false);
@@ -61,7 +61,7 @@ function DestinationPage() {
         };
 
         fetchDetails();
-        console.log(destinationDetails)
+        
         
     }, [id]);
 
@@ -87,9 +87,9 @@ function DestinationPage() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="p-8 max-w-3xl mx-auto mt-10"
+                    className="p-8 max-w-3xl mx-auto mt-10 text-white"
                 >
-                    <button onClick={() => navigate(-1)} className="mb-4 bg-gray-200 px-4 py-2 rounded-md cursor-pointer hover:scale-110">
+                    <button onClick={() => navigate(-1)} className="mb-4 bg-gray-200 px-4 py-2 rounded-md cursor-pointer hover:scale-110 text-black">
                         Back
                     </button>
                     <h1 className="text-4xl font-bold mb-6">{destinationDetails.destination}</h1>

@@ -15,7 +15,7 @@ function Carousel({ recommendations }) {
     };
 
     return (
-        <div className="relative flex items-center justify-center w-full">
+        <div className="relative flex items-center justify-center w-full z-[-1]">
             <Button
                 variant="outline"
                 size="icon"
@@ -45,7 +45,7 @@ function Carousel({ recommendations }) {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 100 }}
                                 transition={{ duration: 0.3 }}
-                                className="h-[400px]"
+                                className="h-[450px]"
                             >
                                 <DestinationCard
                                     recommendation={recommendations[(currentIndex - 1 + recommendations.length) % recommendations.length]}
@@ -63,7 +63,7 @@ function Carousel({ recommendations }) {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -50 }}
                                 transition={{ duration: 0.3 }}
-                                className="h-[450px]"
+                                className="h-[650px]"
                             >
                                 <DestinationCard
                                     recommendation={recommendations[currentIndex]}
@@ -81,7 +81,7 @@ function Carousel({ recommendations }) {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -100 }}
                                 transition={{ duration: 0.3 }}
-                                className="h-[400px]"
+                                className="h-[450px]"
                             >
                                 <DestinationCard
                                     recommendation={recommendations[(currentIndex + 1) % recommendations.length]}
