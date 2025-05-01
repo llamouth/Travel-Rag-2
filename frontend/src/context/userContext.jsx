@@ -50,7 +50,7 @@ export const UserProvider = ({ children }) => {
       }
     };
 
-    if (userId) {
+    if (userId && preferences?.travel_style?.length) {
       fetchData();
     }
   }, [userId]);

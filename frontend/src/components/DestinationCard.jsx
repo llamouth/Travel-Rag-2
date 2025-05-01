@@ -40,6 +40,7 @@ function DestinationCard({ recommendation }) {
     }, [recommendation.destination, recommendation.image_url, recommendation.id]);
 
     const handleCardClick = () => {
+        console.log('Card clicked:', recommendation)
         navigate(`/destination/${recommendation.id}`, { state: { recommendation } });
     };
 

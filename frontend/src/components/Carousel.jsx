@@ -7,15 +7,19 @@ function Carousel({ recommendations }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleNext = () => {
+        console.log('Next clicked')
         setCurrentIndex((prevIndex) => (prevIndex + 1) % recommendations.length);
     };
 
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + recommendations.length) % recommendations.length);
     };
+    const handleClickTest = () => {
+        console.log("test")
+    }
 
     return (
-        <div className="relative flex items-center justify-center w-full z-[-1]">
+        <div className="relative flex items-center justify-center w-full z-[-1]" >
             <Button
                 variant="outline"
                 size="icon"

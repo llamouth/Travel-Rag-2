@@ -44,19 +44,24 @@ function Dashboard() {
         return <AnimatedLoading />;
     }
 
+    const handleTest = () => {
+        console.log("test")
+    }
+
+
     if (error) {
         return <div className="flex justify-center items-center h-screen text-red-500">Error: {error.message || error}</div>;
     }
 
     return (
-        <div className="p-6 flex flex-col items-center w-full max-w-screen-lg mx-auto space-y-8">
+        <div className="p-6 flex flex-col items-center w-full max-w-screen-lg mx-auto space-y-8" >
             <div className="flex justify-between items-center w-full">
-                <h1 className="text-3xl font-bold">Your Recommendations</h1>
+                <h1 className="text-3xl font-bold text-white" >Your Recommendations</h1>
                 <Link to={`/preferences/${id}`}>
                     <Button className="px-6 py-3">Edit Preferences</Button>
                 </Link>
             </div>
-            <div className="w-full">
+            <div className="w-full" onClick={handleTest}>
                 <Carousel recommendations={recommendations} />
             </div>
         </div>

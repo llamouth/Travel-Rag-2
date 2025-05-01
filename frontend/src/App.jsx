@@ -4,7 +4,7 @@ import Welcome from './pages/Welcome';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import NavBar from './components/NavBar';
+import NavBar from './components/Navbar';
 import Preferences from './pages/Preferences';
 import { UserProvider } from './context/userContext';
 import DestinationPage from './pages/Destination';
