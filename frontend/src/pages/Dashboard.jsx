@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Carousel from '@/components/Carousel';
+import DestinationView from '@/components/DestinationView';
+import DestinationCard from '@/components/DestinationCard';
 import { fetchRecommendations } from '@/lib/api';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -58,7 +59,7 @@ function Dashboard() {
                 </Link>
             </div>
             <div className="w-full" >
-                <Carousel recommendations={recommendations} />
+                <DestinationView recommendations={recommendations} />
             </div>
         </div>
     );

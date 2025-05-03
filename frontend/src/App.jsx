@@ -39,7 +39,7 @@ function App() {
     <div className="relative min-h-screen"> 
       <GlowyBackground />
       <UserProvider>
-        <div className="relative z-10"> 
+        <div className="relative "> 
           <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           <div className="pt-16">
             <Routes>

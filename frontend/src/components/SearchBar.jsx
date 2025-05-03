@@ -40,7 +40,7 @@ function SearchBar() {
     };
 
     return (
-        <div className="relative w-full z-10"> 
+        <div className="relative w-full "> 
             <div className="flex items-center space-x-2 w-full selection:bg-amber-500">
                 <Input
                     type="text"
@@ -54,7 +54,7 @@ function SearchBar() {
                 <Button onClick={() => handleResultClick(searchResults[0])} className="rounded-md">Search</Button>
             </div>
             {showSuggestions && searchResults.length > 0 && (
-                <div className="mt-2 w-full bg-white rounded-md shadow-md p-2 absolute top-full left-0 text-black ">
+                <div className="mt-2 w-full bg-white rounded-md shadow-md p-2 absolute top-full left-0 text-black z-[1000]">
                     <ul className="list-none p-0 m-0">
                         {searchResults.map((result) => (
                             <li
