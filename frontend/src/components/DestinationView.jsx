@@ -20,15 +20,13 @@ function DestinationView({ recommendations }) {
     const currentRecommendation = recommendations[currentIndex];
 
     return (
-        <div className="relative flex flex-col items-center justify-center w-full p-4">
-            <div className="w-full max-w-lg">
-                <DestinationCard recommendation={currentRecommendation} />
-            </div>
-            <div className="mt-4 flex justify-center gap-4">
-                <Button variant="outline" onClick={handlePrev}>
-                    Previous
+        <div className="relative h-screen">
+            <DestinationCard recommendation={currentRecommendation} />
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center gap-4">
+                <Button variant="outline" onClick={handlePrev} className="px-4 py-2">
+                    Prev
                 </Button>
-                <Button variant="outline" onClick={handleNext}>
+                <Button variant="outline" onClick={handleNext} className="px-4 py-2">
                     Next
                 </Button>
             </div>

@@ -51,16 +51,8 @@ function Dashboard() {
     }
 
     return (
-        <div className="p-6 flex flex-col items-center w-full max-w-screen-lg mx-auto space-y-8" >
-            <div className="flex justify-between items-center w-full">
-                <h1 className="text-3xl font-bold text-white" >Your Recommendations</h1>
-                <Link to={`/preferences/${id}`}>
-                    <Button className="px-6 py-3">Edit Preferences</Button>
-                </Link>
-            </div>
-            <div className="w-full" >
-                <DestinationView recommendations={recommendations} />
-            </div>
+        <div className="flex flex-col  h-screen">
+            <DestinationView recommendations={recommendations} />
         </div>
     );
 }

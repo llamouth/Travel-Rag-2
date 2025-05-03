@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { fetchPhotosUnsplash, updateDestinationImageUrl } from '@/lib/api'; // Ensure this path is correct
+import { fetchPhotosUnsplash, updateDestinationImageUrl, fetchDestination } from '@/lib/api'; // Import fetchDestination
+import AnimatedLoading from '@/components/AnimatedLoading'; // Assuming you have this component
+import { AnimatePresence } from 'motion/react';
+
 
 function DestinationCard({ recommendation }) {
     const [imageUrl, setImageUrl] = useState('');
     const [imageAlt, setImageAlt] = useState('');
-    const navigate = useNavigate();
+    const [destinationDetails, setDestinationDetails] = useState(null);
+    const [loadingDetails, setLoadingDetails] = useState(true); // Initially loading
+    const [errorDetails, setErrorDetails] = useState(null);
 
     useEffect(() => {
         async function fetchImage() {
@@ -37,34 +42,73 @@ function DestinationCard({ recommendation }) {
         }
 
         fetchImage();
+
+        // Fetch destination details on component mount
+        async function fetchDetails() {
+            try {
+                const details = await fetchDestination(recommendation.id);
+                setDestinationDetails(details);
+                setLoadingDetails(false);
+            } catch (error) {
+                console.error('Error fetching destination details:', error);
+                setErrorDetails('Failed to load details.');
+                setLoadingDetails(false);
+            }
+        }
+
+        fetchDetails();
     }, [recommendation.destination, recommendation.image_url, recommendation.id]);
 
-    const handleCardClick = () => {
-        console.log('Card clicked:', recommendation);
-        navigate(`/destination/${recommendation.id}`, { state: { recommendation } });
-    };
+    useEffect(() => {
+        console.log('Destination Details:', destinationDetails)
+    }, [destinationDetails])
 
     return (
         <motion.div
             initial={{ borderRadius: '10px' }}
             whileTap={{ scale: 0.95 }}
-            className="relative cursor-pointer w-full h-64 overflow-hidden rounded-lg border-4 flex" // Added flex to position the modal
-            onClick={handleCardClick}
+            className="relative cursor-pointer w-screen h-screen overflow-hidden rounded-lg border-4 flex"
         >
             {/* Background Image */}
             <div
-                className="absolute inset-0 bg-cover bg-center transition-opacity duration-300"
-                style={{ backgroundImage: `url(${imageUrl})`, opacity: 0.8 }} // Slightly dimmed background
+                className="absolute inset-0 bg-cover bg-center transition-opacity duration-300 h-screen w-screen"
+                style={{ backgroundImage: `url(${imageUrl})` }}
             ></div>
 
-            {/* Overlay for a subtle darkening effect */}
-            <div className="absolute inset-0 bg-black opacity-20 transition-opacity duration-300"></div>
+            {/* Semi-transparent overlay for readability of initial info */}
+            <div className="absolute top-0 left-0 h-full w-1/3 bg-black opacity-50 text-white p-4 flex flex-col justify-center">
+                <h2 className="text-8xl font-bold mb-2 opacity-100">{recommendation.destination}</h2>
 
-            {/* Side Modal */}
-            <div className="absolute top-0 left-0 h-full w-1/3 bg-black bg-opacity-60 text-white p-4 flex flex-col justify-center">
-                <h2 className="text-xl font-bold mb-2">{recommendation.destination}</h2>
-                <p className="text-sm">{recommendation.category}</p>
-                {/* You can add more details here if needed */}
+                {loadingDetails ? (
+                    <AnimatedLoading />
+                ) : errorDetails ? (
+                    <p className="text-red-500">{errorDetails}</p>
+                ) : destinationDetails ? (
+                    <div>
+                        <p className="text-sm mb-4">{recommendation.category}</p>
+                        <p className="mb-4 text-sm">{destinationDetails.description}</p>
+                        <h3 className="font-semibold text-sm mb-2">Cities</h3>
+                        {destinationDetails.cities?.slice(0, 3)?.map((cityString, index) => {
+                            try {
+                                const cityObject = JSON.parse(cityString);
+                                return (
+                                    <p key={index} className="text-xs mb-1">{cityObject.city}</p>
+                                );
+                            } catch (parseError) {
+                                console.error("Error parsing city string:", cityString, parseError);
+                                return (
+                                    <p key={index} className="text-xs mb-1">Invalid City Data</p>
+                                );
+                            }
+                        })}
+                        <h3 className="font-semibold text-sm mt-2 mb-1">Best Time</h3>
+                        <p className="text-xs mb-1">{destinationDetails.best_times}</p>
+                        <p className="text-xs">{destinationDetails.best_times_explanation?.slice(0, 100)}...</p>
+                        {/* Add other details as needed */}
+                    </div>
+                ) : (
+                    <p className="text-sm">{recommendation.category}</p>
+                )}
             </div>
         </motion.div>
     );

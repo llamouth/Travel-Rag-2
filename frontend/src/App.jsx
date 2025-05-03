@@ -37,11 +37,11 @@ function App() {
 
   return (
     <div className="relative min-h-screen"> 
-      <GlowyBackground />
+      {/* <GlowyBackground /> */}
       <UserProvider>
-        <div className="relative "> 
+        <div className="relative"> 
           <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-          <div className="pt-16">
+          <div className="">
             <Routes>
               <Route path="/" element={<Welcome isLoggedIn={isLoggedIn} />} />
               <Route
