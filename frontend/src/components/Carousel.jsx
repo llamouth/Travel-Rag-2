@@ -12,6 +12,7 @@ function Carousel({ recommendations }) {
     };
 
     const handlePrev = () => {
+        console.log('Prev clicked')
         setCurrentIndex((prevIndex) => (prevIndex - 1 + recommendations.length) % recommendations.length);
     };
     const handleClickTest = () => {
@@ -19,7 +20,7 @@ function Carousel({ recommendations }) {
     }
 
     return (
-        <div className="relative flex items-center justify-center w-full z-[-1]" >
+        <div className="relative flex items-center justify-center w-full" >
             <Button
                 variant="outline"
                 size="icon"
@@ -50,6 +51,7 @@ function Carousel({ recommendations }) {
                                 exit={{ opacity: 0, x: 100 }}
                                 transition={{ duration: 0.3 }}
                                 className="h-[450px]"
+                                onClick={handleClickTest}
                             >
                                 <DestinationCard
                                     recommendation={recommendations[(currentIndex - 1 + recommendations.length) % recommendations.length]}

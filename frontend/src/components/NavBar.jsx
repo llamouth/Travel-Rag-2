@@ -10,8 +10,8 @@ function NavBar({ isLoggedIn, onLogout }) {
             <Link to="/" className="text-lg font-semibold">
                 Entirary
             </Link>
-            <div className="flex items-center space-x-4 flex-grow justify-center"> {/* Center the search bar */}
-                <div className="max-w-md w-full"> {/* Container for search bar with max width */}
+            <div className="flex items-center space-x-4 flex-grow justify-center z-50"> 
+                <div className="max-w-md w-full"> 
                     <SearchBar />
                 </div>
             </div>

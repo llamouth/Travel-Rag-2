@@ -44,10 +44,6 @@ function Dashboard() {
         return <AnimatedLoading />;
     }
 
-    const handleTest = () => {
-        console.log("test")
-    }
-
 
     if (error) {
         return <div className="flex justify-center items-center h-screen text-red-500">Error: {error.message || error}</div>;
@@ -61,7 +57,7 @@ function Dashboard() {
                     <Button className="px-6 py-3">Edit Preferences</Button>
                 </Link>
             </div>
-            <div className="w-full" onClick={handleTest}>
+            <div className="w-full" >
                 <Carousel recommendations={recommendations} />
             </div>
         </div>

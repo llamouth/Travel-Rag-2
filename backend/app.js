@@ -10,7 +10,6 @@ const kaggleDataRoute = require('./routes/kaggleData')
 const userFavoritesRoute = require('./routes/userFavorites')
 const geminiRoute = require('./routes/gemini')
 
-
 app.use(express.json())
 app.use(cors())
 
@@ -23,7 +22,7 @@ app.use('/kaggleData', kaggleDataRoute)
 app.use('/userFavorites', userFavoritesRoute)
 
 app.get('/', (req, res) => {
-  res.json('Hello World!')
+  res.json('Entirary')
 })
 
 app.get('*', (req, res) => {
