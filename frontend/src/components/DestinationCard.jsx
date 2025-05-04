@@ -99,7 +99,7 @@ function DestinationCard({ recommendation }) {
         <motion.div
             initial={{ borderRadius: '10px' }}
             whileTap={{ scale: 0.95 }}
-            className="relative cursor-pointer w-screen h-screen overflow-hidden rounded-lg border-4 flex"
+            className="relative cursor-pointer w-screen h-screen overflow-hidden flex"
         >
             {/* Background Image */}
             <div
@@ -108,7 +108,7 @@ function DestinationCard({ recommendation }) {
             ></div>
 
             {/* Semi-transparent overlay for readability of initial info */}
-            <div className="absolute top-0 left-0 h-full w-1/3 bg-black opacity-50 text-white p-4 flex flex-col justify-center">
+            <div className="absolute top-0 left-0 h-full w-1/3 bg-black opacity-50 text-white p-4 flex flex-col justify-center items-center">
                 <h2 className="text-7xl font-bold mb-2 opacity-100">{recommendation.destination}</h2>
 
                 {loadingDetails ? (
@@ -118,26 +118,28 @@ function DestinationCard({ recommendation }) {
                 ) : errorDetails ? (
                     <p className="text-red-500">{errorDetails}</p>
                 ) : destinationDetails ? (
-                    <div>
+                    <div className='flex flex-col justify-center pt-3'>
                         <p className="text-sm mb-4">{recommendation.category}</p>
                         <p className="mb-4 text-sm">{destinationDetails.description}</p>
-                        <h3 className="font-semibold text-sm mb-2">Cities</h3>
-                        {destinationDetails.cities?.slice(0, 3)?.map((cityString, index) => {
-                            try {
-                                const cityObject = JSON.parse(cityString);
-                                return (
-                                    <p key={index} className="text-xs mb-1">{cityObject.city}</p>
-                                );
-                            } catch (parseError) {
-                                console.error("Error parsing city string:", cityString, parseError);
-                                return (
-                                    <p key={index} className="text-xs mb-1">Invalid City Data</p>
-                                );
-                            }
-                        })}
-                        <h3 className="font-semibold text-sm mt-2 mb-1">Best Time</h3>
-                        <p className="text-xs mb-1">{destinationDetails.best_times}</p>
-                        <p className="text-xs">{destinationDetails.best_times_explanation?.slice(0, 100)}...</p>
+                        <div className="flex flex-col justify-center items-center mb-4">     
+                            <h3 className="font-semibold text-sm mb-2">Cities</h3>
+                            {destinationDetails.cities?.slice(0, 3)?.map((cityString, index) => {
+                                try {
+                                    const cityObject = JSON.parse(cityString);
+                                    return (
+                                        <p key={index} className="text-xs mb-1">{cityObject.city}</p>
+                                    );
+                                } catch (parseError) {
+                                    console.error("Error parsing city string:", cityString, parseError);
+                                    return (
+                                        <p key={index} className="text-xs mb-1">Invalid City Data</p>
+                                    );
+                                }
+                            })}
+                            <h3 className="font-semibold text-sm mt-2 mb-1">Best Time</h3>
+                            <p className="text-xs mb-1">{destinationDetails.best_times}</p>
+                            <p className="text-xs">{destinationDetails.best_times_explanation}</p>
+                        </div>
                         {/* Add other details as needed */}
                     </div>
                 ) : (

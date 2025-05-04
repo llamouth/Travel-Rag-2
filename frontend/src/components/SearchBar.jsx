@@ -34,7 +34,6 @@ function SearchBar() {
     }, [query]);
 
     const handleResultClick = (result) => {
-        
         navigate(`/destination/${result.id}`, { state: { recommendation: { destination: result.destination } } });
         setQuery('');
         setSearchResults([]);

@@ -51,7 +51,7 @@ function Dashboard() {
     }
 
     return (
-        <div className="flex flex-col  h-screen">
+        <div className="flex flex-col h-screen">
             <DestinationView recommendations={recommendations} />
         </div>
     );
