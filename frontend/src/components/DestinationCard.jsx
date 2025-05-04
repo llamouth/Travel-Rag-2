@@ -97,7 +97,7 @@ function DestinationCard({ recommendation }) {
 
     return (
         <motion.div
-            initial={{ borderRadius: '10px' }}
+            initial={{ }}
             whileTap={{ scale: 0.95 }}
             className="relative cursor-pointer w-screen h-screen overflow-hidden flex"
         >

@@ -41,7 +41,7 @@ function App() {
       <UserProvider>
         <div className="relative"> 
           <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-          <div className="">
+          <div>
             <Routes>
               <Route path="/" element={<Welcome isLoggedIn={isLoggedIn} />} />
               <Route

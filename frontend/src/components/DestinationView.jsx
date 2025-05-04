@@ -20,7 +20,7 @@ function DestinationView({ recommendations }) {
     const currentRecommendation = recommendations[currentIndex];
 
     return (
-        <div className="relative h-screen">
+        <div className="relative h-screen rounded-none">
             <DestinationCard recommendation={currentRecommendation} />
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center gap-4">
                 <Button variant="outline" onClick={handlePrev} className="px-4 py-2">
