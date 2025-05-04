@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { fetchPhotosUnsplash, updateDestinationImageUrl, fetchDestination } from '@/lib/api'; // Import fetchDestination
+import { fetchPhotosUnsplash, updateDestinationImageUrl, fetchDestination, fetchGeminiDetails, updateDestinationDetails } from '@/lib/api'; // Import fetchDestination
 import AnimatedLoading from '@/components/AnimatedLoading'; // Assuming you have this component
 import { AnimatePresence } from 'motion/react';
+import { useUser } from '@/context/userContext';
+
 
 
 function DestinationCard({ recommendation }) {
@@ -12,6 +14,8 @@ function DestinationCard({ recommendation }) {
     const [destinationDetails, setDestinationDetails] = useState(null);
     const [loadingDetails, setLoadingDetails] = useState(true); // Initially loading
     const [errorDetails, setErrorDetails] = useState(null);
+    const { currentDestination, setCurrentDestination } = useUser();
+
 
     useEffect(() => {
         async function fetchImage() {
@@ -40,28 +44,56 @@ function DestinationCard({ recommendation }) {
                 setImageAlt(`Error loading image for ${recommendation.destination}`);
             }
         }
+        
+        const fetchDetails = async () => {
+            setLoadingDetails(true);
+            if (recommendation?.id) {
+                try {
+                    const destination = await fetchDestination(recommendation.id);
+
+                    if (destination && destination.destination) {
+                        // Check if details exist in the database
+                        if (destination?.best_times?.length) {
+                            setDestinationDetails(destination);
+                            setLoadingDetails(false);
+                        } else {
+                            // Details don't exist, fetch from Gemini API
+                            const details = await fetchGeminiDetails(destination.destination);
+                            
+
+                            if (details) {
+                                // Update the database with the Gemini details
+                                const newDetails = { cities: details.cities, bestTime: details.bestTime.bestTime, explanation: details.bestTime.explanation, description: details.description.description }
+                                
+                                const updatedDestination = await updateDestinationDetails(recommendation.id, newDetails);
+                                
+
+                                setDestinationDetails(updatedDestination);
+                                setLoadingDetails(false);
+                            } else {
+                                setErrorDetails('Failed to fetch destination details.');
+                                setLoadingDetails(false);
+                            }
+                        }
+                    } else {
+                        setErrorDetails('Destination not found.');
+                        setLoadingDetails(false);
+                    }
+                } catch (err) {
+                    setErrorDetails(err);
+                    setLoadingDetails(false);
+                }
+            } else {
+                setLoadingDetails(false);
+                setErrorDetails('No destination ID provided.');
+            }
+        };
 
         fetchImage();
-
-        // Fetch destination details on component mount
-        async function fetchDetails() {
-            try {
-                const details = await fetchDestination(recommendation.id);
-                setDestinationDetails(details);
-                setLoadingDetails(false);
-            } catch (error) {
-                console.error('Error fetching destination details:', error);
-                setErrorDetails('Failed to load details.');
-                setLoadingDetails(false);
-            }
-        }
-
+        
         fetchDetails();
-    }, [recommendation.destination, recommendation.image_url, recommendation.id]);
-
-    useEffect(() => {
-        console.log('Destination Details:', destinationDetails)
-    }, [destinationDetails])
+        
+    }, [recommendation.destination, recommendation.image_url, recommendation.id, currentDestination]);
 
     return (
         <motion.div
@@ -77,10 +109,12 @@ function DestinationCard({ recommendation }) {
 
             {/* Semi-transparent overlay for readability of initial info */}
             <div className="absolute top-0 left-0 h-full w-1/3 bg-black opacity-50 text-white p-4 flex flex-col justify-center">
-                <h2 className="text-8xl font-bold mb-2 opacity-100">{recommendation.destination}</h2>
+                <h2 className="text-7xl font-bold mb-2 opacity-100">{recommendation.destination}</h2>
 
                 {loadingDetails ? (
-                    <AnimatedLoading />
+                    <div className="absolute top-28">
+                        <AnimatedLoading />
+                    </div>
                 ) : errorDetails ? (
                     <p className="text-red-500">{errorDetails}</p>
                 ) : destinationDetails ? (

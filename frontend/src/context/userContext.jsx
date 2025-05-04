@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
   const  userId  = localStorage.getItem('userId');
   const [userData, setUserData] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
+  const [currentDestination, setCurrentDestination] = useState(null)
   const [preferences, setPreferences] = useState({
     preferred_activities: '',
     travel_style: '',
@@ -61,9 +62,11 @@ export const UserProvider = ({ children }) => {
     preferences,
     loading,
     error,
+    currentDestination,
     setUserData, 
     setRecommendations, 
-    setPreferences, 
+    setPreferences,
+    setCurrentDestination,
   };
 
   return (

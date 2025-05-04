@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { searchDestinations } from '@/lib/api';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import DestinationCard from './DestinationCard';
 
 function SearchBar() {
     const [query, setQuery] = useState('');
@@ -32,7 +33,8 @@ function SearchBar() {
         return () => clearTimeout(delayDebounce);
     }, [query]);
 
-  const handleResultClick = (result) => {
+    const handleResultClick = (result) => {
+        
         navigate(`/destination/${result.id}`, { state: { recommendation: { destination: result.destination } } });
         setQuery('');
         setSearchResults([]);
