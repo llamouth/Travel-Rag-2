@@ -1,6 +1,6 @@
 // src/context/UserContext.js
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { fetchRecommendations, getUserPreferences, fetchUser } from '@/lib/api'; // Import your API functions
+import { fetchRecommendations, getUserPreferences, fetchUser } from '@/lib/api'; 
 import { useParams } from 'react-router-dom';
 
 const UserContext = createContext();
@@ -39,7 +39,7 @@ export const UserProvider = ({ children }) => {
           setRecommendations(recs);
         }
 
-        // Fetch user data (you'll need to create this function in api.js)
+        // Fetch user data 
         const user = await fetchUser(userId);
         setUserData(user);
 

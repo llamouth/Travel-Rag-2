@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; 
 import { motion, AnimatePresence } from 'motion/react';
 import { fetchDestination, fetchGeminiDetails, updateDestinationDetails, fetchPhotosUnsplash, updateDestinationImageUrl } from '../lib/api';
-import AnimatedLoading from '@/components/AnimatedLoading';
+import AnimatedLoading from '@/components/AnimatedLoading'; // Assuming you have this component
+import { Button } from '@/components/ui/button'; // Assuming you have a UI library with a Button component
 
 function DestinationPage() {
     const { id } = useParams(); 
@@ -88,13 +89,20 @@ function DestinationPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="relative w-screen h-screen overflow-hidden flex"
+            className="relative w-screen h-screen overflow-hidden flex z-0"
         >
             {/* Background Image */}
             <div
                 className="absolute inset-0 bg-cover bg-center h-screen w-screen transition-opacity duration-300"
                 style={{ backgroundImage: `url(${imageUrl})` }}
             ></div>
+
+            {/* Back Button */}
+            <div className="absolute top-4 left-4 z-20">
+                <Button onClick={() => navigate(-1)} className="bg-white text-black hover:bg-gray-100">
+                    Go Back
+                </Button>
+            </div>
 
             {/* Semi-transparent overlay for readability of initial info */}
             <div className="absolute top-0 left-0 h-full w-1/3 bg-black opacity-50 text-white p-8 flex flex-col justify-start overflow-y-auto">
