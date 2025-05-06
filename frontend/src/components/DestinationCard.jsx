@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { fetchPhotosUnsplash, updateDestinationImageUrl, fetchDestination, fetchGeminiDetails, updateDestinationDetails } from '@/lib/api'; // Import fetchDestination
-import AnimatedLoading from '@/components/AnimatedLoading'; // Assuming you have this component
+import { fetchPhotosUnsplash, updateDestinationImageUrl, fetchDestination, fetchGeminiDetails, updateDestinationDetails } from '@/lib/api'; 
+import AnimatedLoading from '@/components/AnimatedLoading'; 
 import { AnimatePresence } from 'motion/react';
 import { useUser } from '@/context/userContext';
 
@@ -12,7 +12,7 @@ function DestinationCard({ recommendation }) {
     const [imageUrl, setImageUrl] = useState('');
     const [imageAlt, setImageAlt] = useState('');
     const [destinationDetails, setDestinationDetails] = useState(null);
-    const [loadingDetails, setLoadingDetails] = useState(true); // Initially loading
+    const [loadingDetails, setLoadingDetails] = useState(true); 
     const [errorDetails, setErrorDetails] = useState(null);
     const { currentDestination, setCurrentDestination } = useUser();
 

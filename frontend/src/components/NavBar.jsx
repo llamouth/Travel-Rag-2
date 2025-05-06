@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
 function NavBar({ isLoggedIn, onLogout }) {
-    const id  = localStorage.getItem('userId');
+    const user = localStorage.getItem('user');
+    const id = JSON.parse(user)?.id;
+
 
     return (
         <nav className="p-4 text-white flex justify-between items-center fixed w-screen z-50 bg-gray-900 bg-opacity-50">
