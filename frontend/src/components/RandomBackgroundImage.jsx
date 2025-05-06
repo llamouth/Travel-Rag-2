@@ -1,66 +1,54 @@
 // src/components/RandomBackgroundImage.jsx
-import React, { useState, useEffect } from 'react';
-import { fetchPhotosUnsplash } from '@/lib/api'; // Assuming your fetch function is in this path
+import React, { useEffect, useState } from 'react';
+import { fetchPhotosUnsplash } from '@/lib/api';
+import { motion } from 'motion/react';
 
-function RandomBackgroundImage() {
-  const [backgroundUrl, setBackgroundUrl] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [keywords] = useState(['nature', 'cityscape', 'abstract', 'travel', 'tropical', 'cold']); // Array of keywords to fetch images for
-  const [currentKeywordIndex, setCurrentKeywordIndex] = useState(0);
-  const [intervalTime, setIntervalTime] = useState(10000); // Time in milliseconds (e.g., 10 seconds)
+const keywords = ['nature town', 'cityscape', 'travel', 'tropical', 'snowy city'];
+
+export default function RandomBackgroundImage() {
+  const [backgrounds, setBackgrounds] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalTime = 8000;
 
   useEffect(() => {
-    const loadBackground = async (keyword) => {
-      setLoading(true);
-      setError(null);
-      try {
-        const photos = await fetchPhotosUnsplash(keyword);
-        if (photos && photos.length > 0 && photos[0].urls && photos[0].urls.full) {
-          setBackgroundUrl(photos[0].urls.full);
-        } else {
-          console.warn(`No image found for keyword: ${keyword}`);
-          // If no image, try the next keyword
-          setCurrentKeywordIndex((prevIndex) => (prevIndex + 1) % keywords.length);
-        }
-      } catch (err) {
-        console.error('Error loading background image:', err);
-        setError('Failed to load background image.');
-      } finally {
-        setLoading(false);
-      }
+    const loadImages = async () => {
+      const results = await Promise.all(
+        keywords.map(async (keyword) => {
+          try {
+            const photos = await fetchPhotosUnsplash(keyword);
+            return photos[0]?.urls?.full;
+          } catch {
+            return null;
+          }
+        })
+      );
+      setBackgrounds(results.filter(Boolean));
     };
+    loadImages();
+  }, []);
 
-    loadBackground(keywords[currentKeywordIndex]);
-
-    const intervalId = setInterval(() => {
-      setCurrentKeywordIndex((prevIndex) => (prevIndex + 1) % keywords.length);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((i) => (i + 1) % backgrounds.length);
     }, intervalTime);
+    return () => clearInterval(interval);
+  }, [backgrounds]);
 
-    return () => clearInterval(intervalId); // Cleanup the interval on component unmount
-  }, [keywords, currentKeywordIndex, intervalTime]);
-
-//   useEffect(() => {
-//     // Load a new background whenever the keyword index changes (after the interval)
-//     if (!loading && !error) {
-//       loadBackground(keywords[currentKeywordIndex]);
-//     }
-//   }, [currentKeywordIndex, keywords, loading, error]);
-
-  if (loading) {
-    return <div className="fixed top-0 left-0 w-full h-full bg-gray-100 animate-pulse z-0"></div>; // Loading placeholder, ensure it's behind other content
-  }
-
-  if (error) {
-    return <div className="fixed top-0 left-0 w-full h-full bg-gray-300 flex items-center justify-center text-red-500 z-0">{error}</div>;
-  }
+  if (backgrounds.length === 0) return null;
 
   return (
-    <div
-      className="fixed top-0 left-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 z-0"
-      style={{ backgroundImage: `url(${backgroundUrl})`, opacity: backgroundUrl ? 1 : 0 }}
-    ></div>
+    <div className="relative w-full h-screen overflow-hidden">
+      {backgrounds.map((url, i) => (
+        <motion.div
+          key={url}
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${i === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+          style={{
+            backgroundImage: `url(${url})`,
+          }}
+          animate={{ scale: i === currentIndex ? 1.1 : 1 }}
+          transition={{ duration: intervalTime / 1000, ease: 'ease-in-out' }}
+        />
+      ))}
+    </div>
   );
 }
-
-export default RandomBackgroundImage;

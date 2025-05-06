@@ -37,7 +37,9 @@ function App() {
 
   return (
     <div className="relative min-h-screen"> 
-      <RandomBackgroundImage />
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <RandomBackgroundImage />
+      </div>
       <UserProvider>
         <div className="relative"> 
           <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
