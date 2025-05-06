@@ -37,7 +37,6 @@ function Preferences() {
       }
     };
     fetchUser();
-    console.log(preferences)
   }, [id]);
 
   const handleChange = (e) => {

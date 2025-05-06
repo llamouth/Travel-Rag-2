@@ -24,37 +24,37 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        // Fetch user preferences
-        const preferences = await getUserPreferences(userId);
-        setPreferences(preferences);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     setError(null);
+  //     try {
+  //       // Fetch user preferences
+  //       const preferences = await getUserPreferences(userId);
+  //       setPreferences(preferences);
 
-        // Fetch recommendations
-        if (preferences?.travel_style?.length) {
-          const recs = await fetchRecommendations(userId);
-          setRecommendations(recs);
-        }
+  //       // Fetch recommendations
+  //       if (preferences?.travel_style?.length) {
+  //         const recs = await fetchRecommendations(userId);
+  //         setRecommendations(recs);
+  //       }
 
-        // Fetch user data 
-        const user = await fetchUser(userId);
-        setUserData(user);
+  //       // Fetch user data 
+  //       const user = await fetchUser(userId);
+  //       setUserData(user);
 
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching user data:', err);
-        setError(err.message || 'Failed to fetch user data.');
-        setLoading(false);
-      }
-    };
+  //       setLoading(false);
+  //     } catch (err) {
+  //       console.error('Error fetching user data:', err);
+  //       setError(err.message || 'Failed to fetch user data.');
+  //       setLoading(false);
+  //     }
+  //   };
 
-    if (userId && preferences?.travel_style?.length) {
-      fetchData();
-    }
-  }, [userId]);
+  //   if (userId && preferences?.travel_style?.length) {
+  //     fetchData();
+  //   }
+  // }, [userId]);
 
   const contextValue = {
     userData,

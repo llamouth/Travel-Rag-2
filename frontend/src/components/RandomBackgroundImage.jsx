@@ -1,7 +1,7 @@
 // src/components/RandomBackgroundImage.jsx
 import React, { useEffect, useState } from 'react';
 import { fetchPhotosUnsplash } from '@/lib/api';
-import { motion } from 'motion/react';
+import { motion, easeInOut } from 'motion/react';
 
 const keywords = ['nature town', 'cityscape', 'travel', 'tropical', 'snowy city'];
 
@@ -46,7 +46,7 @@ export default function RandomBackgroundImage() {
             backgroundImage: `url(${url})`,
           }}
           animate={{ scale: i === currentIndex ? 1.1 : 1 }}
-          transition={{ duration: intervalTime / 1000, ease: 'ease-in-out' }}
+          transition={{ duration: intervalTime / 1000, ease: easeInOut }}
         />
       ))}
     </div>

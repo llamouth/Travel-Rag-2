@@ -48,7 +48,8 @@ export default function SignUp({ setIsLoggedIn }) {
       setIsLoggedIn(true);
       localStorage.setItem('token', newUser.token);
       localStorage.setItem('user', JSON.stringify(newUser.user));
-      navigate('/');
+      console.log(newUser)
+      navigate(`/preferences/${newUser.user.id}`);
     } catch (error) {
       console.error(error);
     } finally {
