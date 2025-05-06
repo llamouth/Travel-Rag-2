@@ -39,7 +39,7 @@ function ProfilePage() {
               activeTab === "vision-board" ? "bg-gray-700" : "hover:bg-gray-700"
             }`}
           >
-            Vision Board
+            Vision Boards
           </button>
           <button
             onClick={() => setActiveTab("favorites")}
