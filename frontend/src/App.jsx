@@ -8,7 +8,7 @@ import NavBar from './components/Navbar';
 import Preferences from './pages/Preferences';
 import { UserProvider } from './context/userContext';
 import DestinationPage from './pages/Destination';
-import GlowyBackground from './components/GlowyBackground';
+import RandomBackgroundImage from './components/RandomBackgroundImage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="relative min-h-screen"> 
-      {/* <GlowyBackground /> */}
+      <RandomBackgroundImage />
       <UserProvider>
         <div className="relative"> 
           <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
