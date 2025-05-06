@@ -80,18 +80,3 @@ BEFORE INSERT OR UPDATE ON user_favorites
 FOR EACH ROW
 EXECUTE FUNCTION check_user_favorites_destination_id();
 
--- Trigger to ensure kaggle_data.user_text is not null
-CREATE OR REPLACE FUNCTION check_kaggle_data_user_text()
-RETURNS TRIGGER AS $$
-BEGIN
-  IF NEW.user_text IS NULL THEN
-    RAISE EXCEPTION 'user_text cannot be null in kaggle_data table';
-  END IF;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER kaggle_data_user_text_check
-BEFORE INSERT OR UPDATE ON kaggle_data
-FOR EACH ROW
-EXECUTE FUNCTION check_kaggle_data_user_text();

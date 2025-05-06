@@ -53,30 +53,33 @@ CREATE TABLE IF NOT EXISTS user_recommendations (
     recommendation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS kaggle_data (
-    id SERIAL PRIMARY KEY,
-    age INTEGER,
-    gender VARCHAR(10),
-    income INTEGER,
-    education_level VARCHAR(50),
-    travel_frequency INTEGER,
-    preferred_activities TEXT,
-    vacation_budget INTEGER,
-    location VARCHAR(50),
-    proximity_to_mountains INTEGER,
-    proximity_to_beaches INTEGER,
-    favorite_season VARCHAR(20),
-    pets BOOLEAN,
-    environmental_concerns BOOLEAN,
-    preference BOOLEAN,
-    user_text TEXT,
-    embedding vector(768)
-);
-
 CREATE TABLE IF NOT EXISTS user_favorites (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     destination_id INT REFERENCES destinations(id),
     favorite_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (user_id, destination_id) -- Ensures a user can't favorite the same place twice
+);
+
+-- VISION BOARDS TABLE
+CREATE TABLE vision_boards (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- VISION BOARD ITEMS TABLE
+CREATE TABLE vision_board_items (
+    id SERIAL PRIMARY KEY,
+    board_id INTEGER REFERENCES vision_boards(id) ON DELETE CASCADE,
+    image_url TEXT,
+    location_name VARCHAR(100) NOT NULL,
+    note TEXT,
+    link_url TEXT,
+    order_index INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
