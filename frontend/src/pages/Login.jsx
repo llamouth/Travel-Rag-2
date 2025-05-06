@@ -25,7 +25,7 @@ function Login({ onLogin }) {
       setUserData(response.user);
       localStorage.setItem('token', response.token);
       onLogin(response.token);
-      localStorage.setItem('userId', response.user.id);
+      localStorage.setItem('user', response.user.id);
       navigate(`/dashboard?userId=${response.user.id}`);
     } catch (err) {
       console.error('Login failed:', err);

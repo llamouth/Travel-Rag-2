@@ -12,7 +12,7 @@ import { Slider } from '@/components/ui/slider';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { createUserPreferences, updateUserPreferences } from '@/lib/api';
+import { createUserPreferences, getUserPreferences, updateUserPreferences } from '@/lib/api';
 import { useUser } from '@/context/userContext';
 
 function Preferences() {
@@ -33,12 +33,9 @@ function Preferences() {
   });
 
   useEffect(() => {
-    const fetchUser = async () => {
-      if (preferences?.travel_style?.length) {
-        setLocalPreferences(preferences);
-      }
-    };
-    fetchUser();
+    if (preferences?.travel_style?.length) {
+      setLocalPreferences(preferences);
+    }
   }, [id, preferences]);
 
   const handleChange = (e) => {
@@ -63,6 +60,18 @@ function Preferences() {
       alert('Failed to save preferences.');
     }
   };
+
+  useEffect(() => {
+    const fetchUserPreferences = async () => {
+      const userPreferences = await getUserPreferences(id)
+      if (userPreferences) {
+        setLocalPreferences(userPreferences);
+      }
+    }
+    if (id) {
+      fetchUserPreferences();
+    }
+  }, [])
 
   return (
     <div className="flex flex-col items-center p-6 pt-28"> 

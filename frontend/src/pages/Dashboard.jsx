@@ -12,7 +12,7 @@ function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchParams] = useSearchParams();
-    const id = searchParams.get('userId');
+    const id = localStorage.getItem('user');
     const { preferences } = useUser(); 
     const [preferenceUpdate, setPreferenceUpdate] = useState(0); 
 

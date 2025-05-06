@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
 function NavBar({ isLoggedIn, onLogout }) {
-    const user = localStorage.getItem('user');
-    const id = JSON.parse(user)?.id;
+    const user_id = localStorage.getItem('user');
 
 
     return (
@@ -19,10 +18,10 @@ function NavBar({ isLoggedIn, onLogout }) {
             </div>
             {isLoggedIn ? (
                 <div className="flex items-center space-x-4">
-                    <Link to={`/dashboard?userId=${id}`} className="hover:text-gray-300 transition-colors duration-200">
+                    <Link to={`/dashboard?userId=${user_id}`} className="hover:text-gray-300 transition-colors duration-200">
                         Dashboard
                     </Link>
-                    <Link to={`/preferences/${id}`} className={`hover:text-gray-300 transition-colors duration-200 `}>
+                    <Link to={`/preferences/${user_id}`} className={`hover:text-gray-300 transition-colors duration-200 `}>
                         Preferences
                     </Link>
                     <button
