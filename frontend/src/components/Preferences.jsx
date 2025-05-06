@@ -74,7 +74,7 @@ function Preferences() {
   }, [])
 
   return (
-    <div className="flex flex-col items-center p-6 pt-28"> 
+    <div className="flex flex-col items-center p-6 pt-24"> 
       <Card className="w-full h-full max-w-screen-md  bg-white/70 backdrop-blur-md"> 
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Set Your Travel Preferences</CardTitle>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaPlane } from 'react-icons/fa'; // Font Awesome airplane icon
 import SearchBar from './SearchBar';
 
 function NavBar({ isLoggedIn, onLogout }) {
     const user_id = localStorage.getItem('user');
-
 
     return (
         <nav className="p-4 text-white flex justify-between items-center fixed w-screen z-50 bg-gray-900 bg-opacity-50">
@@ -21,8 +21,8 @@ function NavBar({ isLoggedIn, onLogout }) {
                     <Link to={`/dashboard?userId=${user_id}`} className="hover:text-gray-300 transition-colors duration-200">
                         Dashboard
                     </Link>
-                    <Link to={`/preferences/${user_id}`} className={`hover:text-gray-300 transition-colors duration-200 `}>
-                        Preferences
+                    <Link to={`/profile/${user_id}`} className="hover:text-blue-400 text-xl transition-colors duration-200">
+                        <FaPlane />
                     </Link>
                     <button
                         onClick={onLogout}
