@@ -8,8 +8,12 @@ const {
     registerUser,
     userLogIn,
 } = require('../controllers/usersController');
+const visionBoardsRoutes = require('./visionBoards');
+
 
 const router = express.Router();
+
+router.use('/vision-boards', visionBoardsRoutes)
 
 // All Users
 router.get('/', allUsers);
