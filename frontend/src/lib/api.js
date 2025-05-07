@@ -150,3 +150,32 @@ export const fetchDestination = async (destinationId) => {
     throw error;
   }
 };
+
+export const fetchUserFavorites = async (userId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/userFavorites/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const fetchSingleFavorite = async ()
+
+export const addFavorite = async (userId, destinationId) => { 
+  try {
+    const response = await axios.post(`${API_BASE_URL}/userFavorites`, {userId, destinationId});
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const removeFavorite = async (userId, destinationId) => { 
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/userFavorites/`, {userId, destinationId});
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

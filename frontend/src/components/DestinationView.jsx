@@ -13,6 +13,8 @@ function DestinationView({ recommendations }) {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + recommendations.length) % recommendations.length);
     };
 
+    
+
     if (!recommendations || recommendations.length === 0) {
         return <div>No recommendations available.</div>;
     }
@@ -23,10 +25,10 @@ function DestinationView({ recommendations }) {
         <div className="relative h-screen rounded-none">
             <DestinationCard recommendation={currentRecommendation} />
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center gap-4">
-                <Button variant="outline" onClick={handlePrev} className="px-4 py-2">
+                <Button variant="outline" onClick={handlePrev} className="px-4 py-2 cursor-pointer">
                     Prev
                 </Button>
-                <Button variant="outline" onClick={handleNext} className="px-4 py-2">
+                <Button variant="outline" onClick={handleNext} className="px-4 py-2 cursor-pointer">
                     Next
                 </Button>
             </div>
