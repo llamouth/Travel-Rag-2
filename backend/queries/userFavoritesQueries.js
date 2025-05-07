@@ -12,12 +12,11 @@ const getAllUserFavorites = async () => {
 
 // Get user favorite by ID
 const getUserFavoriteByUserIdAndDestinationId = async (user) => {
-    const { userId, destinationId } = user
-    
+    const { id, destination_id } = user
     try {
         return await db.oneOrNone(
             'SELECT * FROM user_favorites WHERE user_id = $1 AND destination_id = $2',
-            [userId, destinationId]
+            [id, destination_id]
         );
     } catch (error) {
         throw error;

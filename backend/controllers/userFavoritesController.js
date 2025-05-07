@@ -21,11 +21,13 @@ const getAllUserFavorites = async (req, res) => {
 const getUserFavoriteByUserIdAndDestinationId = async (req, res) => {
     try {
       const { id } = req.params;
-      const favorite = await getUserFavoriteByUserIdAndDestinationIdQuery({id, ...req.body});
+      const { destination_id } = req.query;
+      const favorite = await getUserFavoriteByUserIdAndDestinationIdQuery({ id, destination_id });
+      
       if (favorite) {
         res.status(200).json(favorite);
       } else {
-        res.status(404).json({ error: 'User favorite not found' });
+        res.status(200).json({ not_favorite: 'User favorite not found' });
       }
     } catch (error) {
       console.error('Error getting user favorite by ID:', error);
@@ -58,17 +60,18 @@ const createUserFavorite = async (req, res) => {
   
 // Delete user favorite
 const deleteUserFavorite = async (req, res) => {
-    try {
-      const deletedFavorite = await deleteUserFavoriteQuery(req.body);
-      if (deletedFavorite) {
-        res.status(200).json({ message: 'User favorite deleted successfully' });
-      } else {
-        res.status(404).json({ error: 'User favorite not found' });
-      }
-    } catch (error) {
-      console.error('Error deleting user favorite:', error);
-      res.status(500).json({ error: 'Internal server error' });
+  try {
+    const { userId, destinationId } = req.query;
+    const deletedFavorite = await deleteUserFavoriteQuery({ user_id: userId, destination_id: destinationId });
+    if (deletedFavorite) {
+      res.status(200).json({ message: 'User favorite deleted successfully' });
+    } else {
+      res.status(404).json({ error: 'User favorite not found' });
     }
+  } catch (error) {
+    console.error('Error deleting user favorite:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
   
 module.exports = {
