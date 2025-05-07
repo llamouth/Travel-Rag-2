@@ -48,7 +48,8 @@ function Preferences() {
 
   const handleSavePreferences = async () => {
     try {
-      if (preferences?.travel_style?.length && !preferences.error) {
+      if (preferences?.travel_style?.length) {
+        console.log('Saving preferences:', localPreferences);
         await updateUserPreferences(id, localPreferences);
       } else {
         await createUserPreferences(id, localPreferences);
