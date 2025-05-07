@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { searchDestinations } from '@/lib/api';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import DestinationCard from './DestinationCard';
+import { useNavigate } from 'react-router-dom'; 
 
 function SearchBar() {
     const [query, setQuery] = useState('');
