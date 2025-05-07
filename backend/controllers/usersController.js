@@ -68,7 +68,7 @@ const deletedUser = async (req, res) => {
 const registerUser = async (req, res) => {
     try {
         const newUser = await createUser(req.body);
-        
+        console.log(newUser)
         if (newUser.error) {
             return res.status(401).json({ error: newUser.error });
         }
