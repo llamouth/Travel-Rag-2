@@ -9,7 +9,7 @@ const {
   addItemToBoard,
   updateItem,
   deleteItem
-} = require('../controllers/visionBoardsController');
+} = require('../controllers/visionBoardController');
 
 const router = express.Router();
 

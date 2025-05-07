@@ -4,10 +4,10 @@ const {
     createVisionBoard,
     updateVisionBoard,
     deleteVisionBoard,
-    getItemsForBoard,
-    addItemToBoard,
-    updateBoardItem,
-    deleteBoardItem
+    getItemsForBoard: getItemsForBoardQuery ,
+    addItemToBoard: addItemToBoardQuery,
+    updateBoardItem: updateBoardItemQuery,
+    deleteBoardItem: deleteBoardItemQuery,
   } = require('../queries/visionBoardQueries');
   
   // Get all boards
@@ -84,7 +84,7 @@ const {
   const getItemsForBoard = async (req, res) => {
     try {
       const { id } = req.params;
-      const items = await getItemsForBoard(id);
+      const items = await getItemsForBoardQuery(id);
       res.status(200).json(items);
     } catch (error) {
       console.error('Error getting items:', error);
@@ -96,7 +96,7 @@ const {
   const addItemToBoard = async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await addItemToBoard(id, req.body);
+      const item = await addItemToBoardQuery(id, req.body);
       res.status(201).json(item);
     } catch (error) {
       console.error('Error adding item:', error);
@@ -108,7 +108,7 @@ const {
   const updateItem = async (req, res) => {
     try {
       const { itemId } = req.params;
-      const updated = await updateBoardItem(itemId, req.body);
+      const updated = await updateBoardItemQuery(itemId, req.body);
       if (updated) {
         res.status(200).json(updated);
       } else {
@@ -124,7 +124,7 @@ const {
   const deleteItem = async (req, res) => {
     try {
       const { itemId } = req.params;
-      const deleted = await deleteBoardItem(itemId);
+      const deleted = await deleteBoardItemQuery(itemId);
       if (deleted) {
         res.status(200).json({ message: 'Item deleted successfully' });
       } else {
