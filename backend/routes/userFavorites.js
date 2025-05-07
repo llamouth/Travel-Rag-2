@@ -23,6 +23,6 @@ router.get('/user/:userId', getUserFavoritesByUserId);
 router.post('/', createUserFavorite);
 
 // Delete user favorite
-router.delete('/:id', deleteUserFavorite);
+router.delete('/', deleteUserFavorite);
 
 module.exports = router;

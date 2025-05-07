@@ -41,13 +41,18 @@ const createUserFavorite = async (user) => {
 };
 
 // Delete user favorite
-const deleteUserFavorite = async (id) => {
+const deleteUserFavorite = async (user) => {
     try {
-        return await db.oneOrNone('DELETE FROM user_favorites WHERE id = $1 RETURNING *', id);
+        const {user_id, destination_id} = user
+        return await db.oneOrNone(
+            'DELETE FROM user_favorites WHERE user_id = $1 AND destination_id = $2 RETURNING *',
+            [user_id, destination_id]
+        );
     } catch (error) {
         throw error;
     }
 };
+
 
 module.exports = {
   getAllUserFavorites,

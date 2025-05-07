@@ -59,8 +59,7 @@ const createUserFavorite = async (req, res) => {
 // Delete user favorite
 const deleteUserFavorite = async (req, res) => {
     try {
-      const { id } = req.params;
-      const deletedFavorite = await deleteUserFavoriteQuery(id);
+      const deletedFavorite = await deleteUserFavoriteQuery(req.body);
       if (deletedFavorite) {
         res.status(200).json({ message: 'User favorite deleted successfully' });
       } else {
