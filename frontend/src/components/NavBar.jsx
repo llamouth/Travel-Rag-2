@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaPlane } from 'react-icons/fa'; // Font Awesome airplane icon
 import SearchBar from './SearchBar';
 
-function NavBar({ isLoggedIn, onLogout }) {
+function Navbar({ isLoggedIn, onLogout }) {
     const user_id = localStorage.getItem('user');
 
     return (
@@ -45,4 +45,4 @@ function NavBar({ isLoggedIn, onLogout }) {
     );
 }
 
-export default NavBar;
+export default Navbar;

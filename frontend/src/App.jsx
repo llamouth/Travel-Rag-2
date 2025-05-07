@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import DestinationPage from "./pages/Destination";
 import Profile from "./pages/Profile";
-import NavBar from "./components/Navbar";
+import NavBar from "@/components/NavBar";
 import RandomBackgroundImage from "./components/RandomBackgroundImage";
 
 function App() {
