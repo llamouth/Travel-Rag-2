@@ -5,7 +5,6 @@ import Welcome from "./pages/Welcome";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Preferences from "./components/Preferences";
 import DestinationPage from "./pages/Destination";
 import Profile from "./pages/Profile";
 import NavBar from "./components/Navbar";
