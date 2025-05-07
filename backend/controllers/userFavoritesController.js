@@ -1,6 +1,6 @@
 const {
     getAllUserFavorites: getAllUserFavoritesQuery,
-    getUserFavoritesById: getUserFavoritesByIdQuery,
+    getUserFavoriteByUserIdAndDestinationId: getUserFavoriteByUserIdAndDestinationIdQuery,
     getUserFavoritesByUserId: getUserFavoritesByUserIdQuery,
     createUserFavorite: createUserFavoriteQuery,
     deleteUserFavorite: deleteUserFavoriteQuery,
@@ -18,10 +18,10 @@ const getAllUserFavorites = async (req, res) => {
 };
   
 // Get user favorite by ID
-const getUserFavoritesById = async (req, res) => {
+const getUserFavoriteByUserIdAndDestinationId = async (req, res) => {
     try {
       const { id } = req.params;
-      const favorite = await getUserFavoritesByIdQuery(id);
+      const favorite = await getUserFavoriteByUserIdAndDestinationIdQuery({id, ...req.body});
       if (favorite) {
         res.status(200).json(favorite);
       } else {
@@ -73,7 +73,7 @@ const deleteUserFavorite = async (req, res) => {
   
 module.exports = {
     getAllUserFavorites,
-    getUserFavoritesById,
+    getUserFavoriteByUserIdAndDestinationId,
     getUserFavoritesByUserId,
     createUserFavorite,
     deleteUserFavorite,

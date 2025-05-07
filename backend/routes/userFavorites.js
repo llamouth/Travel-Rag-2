@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const {
   getAllUserFavorites,
-  getUserFavoritesById,
+  getUserFavoriteByUserIdAndDestinationId,
   getUserFavoritesByUserId,
   createUserFavorite,
   deleteUserFavorite,
@@ -14,7 +14,7 @@ const router = Router();
 router.get('/', getAllUserFavorites);
 
 // Get user favorite by ID
-router.get('/:id', getUserFavoritesById);
+router.get('/:id', getUserFavoriteByUserIdAndDestinationId);
 
 // Get user favorites by user ID
 router.get('/user/:userId', getUserFavoritesByUserId);

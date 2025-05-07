@@ -11,9 +11,14 @@ const getAllUserFavorites = async () => {
 };
 
 // Get user favorite by ID
-const getUserFavoritesById = async (id) => {
+const getUserFavoriteByUserIdAndDestinationId = async (user) => {
+    const { userId, destinationId } = user
+    
     try {
-        return await db.oneOrNone('SELECT * FROM user_favorites WHERE id = $1', id);
+        return await db.oneOrNone(
+            'SELECT * FROM user_favorites WHERE user_id = $1 AND destination_id = $2',
+            [userId, destinationId]
+        );
     } catch (error) {
         throw error;
     }
@@ -56,7 +61,7 @@ const deleteUserFavorite = async (user) => {
 
 module.exports = {
   getAllUserFavorites,
-  getUserFavoritesById,
+  getUserFavoriteByUserIdAndDestinationId,
   getUserFavoritesByUserId,
   createUserFavorite,
   deleteUserFavorite,
