@@ -121,6 +121,13 @@ function DestinationCard({ recommendation }) {
             }
         };
 
+
+        fetchImage();
+
+        fetchDetails();
+    }, [recommendation.destination, recommendation.image_url, recommendation.id, currentDestination]);
+
+    useEffect(() => {
         const fetchFavorite = async () => {
             try {
                 const favorite = await fetchSingleFavorite(user_id, recommendation.id);
@@ -130,14 +137,10 @@ function DestinationCard({ recommendation }) {
             } catch (error) {
                 throw error;
             }
-        }
-
-        fetchImage();
-
-        fetchDetails();
+        };
 
         fetchFavorite();
-    }, [recommendation.destination, recommendation.image_url, recommendation.id, currentDestination]);
+    },[destinationDetails])
 
 
 
