@@ -41,7 +41,7 @@ function App() {
         <RandomBackgroundImage />
       </div>
       <UserProvider>
-        <div className="relative">
+        <div className="relative w-full">
           <NavBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           <div>
             <Routes>

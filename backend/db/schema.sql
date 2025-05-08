@@ -5,7 +5,6 @@ CREATE DATABASE travelrag_dev;
 \c travelrag_dev;
 
 CREATE EXTENSION IF NOT EXISTS vector;
--- CREATE EXTENSION plv8;
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,

@@ -1,15 +1,10 @@
 const {
   getAllUserRecommendations: getAllUserRecommendationsQuery,
-  getUserRecommendationsByUserId: getUserRecommendationsByUserIdQuery,
   createUserRecommendation: createUserRecommendationQuery,
   deleteUserRecommendation: deleteUserRecommendationQuery,
 } = require('../queries/userRecommendationsQueries');
-const generateEmbedding  = require('../utils/generateEmbedding');
 const { getUserPreferencesById } = require('../queries/usersPreferencesQueries');
 const { searchDestinations } = require('../queries/destinationsQueries');
-const { searchKaggleData } = require('../queries/kaggleDataQueries');
-const parseGeminiRecommendations = require('../utils/parseRecommendations');
-const geminiAi = require('../utils/geminiAi');
 
 
 
