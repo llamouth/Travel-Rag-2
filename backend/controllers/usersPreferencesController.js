@@ -17,7 +17,7 @@ const userPreferencesById = async (req, res) => {
     try {
         const { id } = req.params;
         const userPreferences = await getUserPreferencesById(id);
-
+        console.log(userPreferences)
         if (userPreferences) {
             res.status(200).json(userPreferences);
         } else {

@@ -591,28 +591,6 @@
       "description": "Known for its beautiful beaches, temples, and delicious food."
     },
     {
-        "destination": "Vietnam",
-        "search_terms": ["VN", "Vietnamese", "Hanoi", "Ho Chi Minh City"],
-        "similarity_terms": [
-            "Hanoi",
-            "Ho Chi Minh City",
-            "Da Nang",
-            "Hue",
-            "Ha Long Bay",
-            "history",
-            "culture",
-            "Vietnamese food",
-            "beaches",
-            "Mekong Delta",
-            "war history",
-            "ancient temples",
-          "modern cities",
-          "diverse landscapes",
-          "cultural heritage"
-        ],
-        "description": "Known for its rich history, delicious food, and diverse landscapes."
-    },
-    {
         "destination": "Egypt",
         "search_terms": ["EG", "Egyptian", "Cairo", "pyramids", "Nile"],
         "similarity_terms": [
@@ -1283,38 +1261,6 @@
             ],
             "description": "Known for its beautiful beaches, relaxed lifestyle, and rich culture."
           },
-          {
-            "destination": "Bolivia",
-            "search_terms": ["BO", "Bolivian", "La Paz", "Salar de Uyuni"],
-            "similarity_terms": [
-                "La Paz",
-                "Salar de Uyuni",
-                "Andes Mountains",
-                "Amazon rainforest",
-                "salt flats",
-                "culture",
-                "indigenous cultures",
-                "lakes",
-                "mountains"
-            ],
-            "description": "Known for its stunning salt flats, Andes Mountains, and indigenous cultures."
-        },
-        {
-            "destination": "Azerbaijan",
-            "search_terms": ["AZ", "Azerbaijani", "Baku"],
-            "similarity_terms": [
-                "Baku",
-                "history",
-                "culture",
-                "modern cities",
-                "ancient sites",
-                "oil",
-                "Caucasus Mountains",
-                "mud volcanoes",
-                "fire temple"
-            ],
-            "description": "Known for its blend of modern and ancient architecture, and its rich history."
-        },
           {
             "destination": "Tunisia",
             "search_terms": ["TN", "Tunisian", "Tunis"],
