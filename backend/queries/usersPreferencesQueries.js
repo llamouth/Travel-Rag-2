@@ -43,17 +43,15 @@ const updateUserPreferences = async (user) => {
     try {
         const { id, preferred_activities, travel_style, interests, specific_keywords, budget, preferred_season, location_type, accommodation_type, transportation_type} = user;
 
-
+        console.log(id)
         const preferencesText = `${preferred_activities} ${travel_style} ${interests} ${specific_keywords} ${budget} ${preferred_season} ${location_type} ${accommodation_type} ${transportation_type}`;
         const newEmbedding = await generateEmbedding(preferencesText);
         
-        let newOne = await db.oneOrNone(
+
+        return await db.oneOrNone(
             'UPDATE user_preferences SET preferred_activities = $2, travel_style = $3, interests = $4, specific_keywords = $5, budget = $6, preferred_season = $7, location_type = $8, accommodation_type = $9, transportation_type = $10, embedding = $11 WHERE user_id = $1 RETURNING *',
             [ id, preferred_activities, travel_style, interests, specific_keywords, budget, preferred_season, location_type, accommodation_type, transportation_type, newEmbedding ]
         );
-        console.log(newOne)
-
-        return newOne
     } catch (error) {
         throw error;
     }
