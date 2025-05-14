@@ -41,9 +41,9 @@ const createUserPreferences = async (user) => {
 // Update user preferences
 const updateUserPreferences = async (user) => {
     try {
-        const { id, preferred_activities, travel_style, interests, specific_keywords, budget, preferred_season, location_type, accommodation_type, transportation_type} = user;
+        const { id, user_id, preferred_activities, travel_style, interests, specific_keywords, budget, preferred_season, location_type, accommodation_type, transportation_type} = user;
 
-        console.log(id)
+        console.log(user_id)
         const preferencesText = `${preferred_activities} ${travel_style} ${interests} ${specific_keywords} ${budget} ${preferred_season} ${location_type} ${accommodation_type} ${transportation_type}`;
         const newEmbedding = await generateEmbedding(preferencesText);
         
