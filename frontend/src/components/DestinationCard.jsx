@@ -44,9 +44,8 @@ function DestinationCard({ recommendation }) {
                     setImageUrl(recommendation.image_url);
                     setImageAlt(recommendation.destination);
                 } else {
-                    const response = await fetchPhotosUnsplash(
-                        recommendation.destination
-                    );
+                    const response = await fetchPhotosUnsplash(recommendation.destination);
+
                     if (response && response.length > 0) {
                         const unsplashImageUrl = response[0].urls.regular;
                         const unsplashImageAlt =
@@ -133,6 +132,8 @@ function DestinationCard({ recommendation }) {
                 const favorite = await fetchSingleFavorite(user_id, recommendation.id);
                 if (!favorite.not_favorite) {
                     setFavorited(true);
+                } else {
+                    setFavorited(false)
                 }
             } catch (error) {
                 throw error;
