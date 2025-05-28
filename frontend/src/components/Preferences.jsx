@@ -66,7 +66,8 @@ function Preferences() {
     const fetchUserPreferences = async () => {
       const userPreferences = await getUserPreferences(id)
       if (userPreferences) {
-        setLocalPreferences(userPreferences);
+        setLocalPreferences(userPreferences)
+        setPreferences(userPreferences)
       }
     }
     if (id) {
